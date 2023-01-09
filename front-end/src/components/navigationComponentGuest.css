@@ -1,0 +1,18 @@
+.main-div{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 50px;
+}
+
+.logo-text-div{
+    display: flex;
+}
+
+button{
+    border-radius: 35px;
+    background-color: white;
+    padding: 10px 40px;
+    border: 2px solid #ff4911;
+    margin-left: 20px;
+    color: black;
+}
