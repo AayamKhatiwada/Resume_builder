@@ -6,7 +6,7 @@ const NavigationComponentGuest = () => {
         <div className='main-div'>
             <div className='logo-text-div'>
                 <img src={Logo} alt="logo" width="100px" />
-                <h2 style={{ color: "#ff4911" }}>Booster Up</h2>
+                <h2 style={{ color: "rgb(253 124 31 / 91%)" }}>Booster Up</h2>
             </div>
 
             <div className='button-div'>

@@ -21,9 +21,9 @@ const SigninComponent = () => {
                     <div className='same-line-spaceBetween'>
                         <div className='same-line'>
                             <div style={{ marginRight: "5px" }}>
-                                <input type="checkbox" name="remember" />
+                                <input type="checkbox" name="remember" id="remember"/>
                             </div>
-                            <label name="remember">Remember for 30days</label>
+                            <label name="remember" for="remember">Remember me</label>
                         </div>
                         <a href='/'>Forget Password</a>
                     </div>

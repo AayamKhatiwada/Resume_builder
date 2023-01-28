@@ -1,0 +1,112 @@
+.home-main {
+    padding: 4rem 12rem;
+}
+
+.home-quick {
+    display: flex;
+    justify-content: space-around;
+}
+
+.home-quick-leftside {
+    padding: 4rem 0;
+}
+
+.home-quick-leftside-title {
+    font-weight: 500;
+    width: 80%;
+    font-size: 45px;
+    padding-bottom: 3rem;
+}
+
+.home-color-orange {
+    color: rgb(253 124 31 / 91%);
+}
+
+.home-quick-leftside-button {
+    border-radius: 35px;
+    background-color: #FF5C00;
+    padding: 1rem 12rem;
+    border: 2px solid #FF5C00;
+    margin-left: 12rem;
+    color: white;
+    font-size: 20px;
+}
+
+.home-quick-rightside {
+    text-align: center;
+}
+
+.home-quick-leftside-desc {
+    font-size: 18px;
+    width: 80%;
+    padding-bottom: 9rem;
+}
+
+
+.home-resumeStep {
+    display: flex;
+    flex-direction: column;
+    padding: 10rem;
+}
+
+.home-resumeStep-title {
+    text-align: center;
+    font-size: 45px;
+    font-weight: 500;
+}
+
+.home-resumeStep-right {
+    justify-content: left;
+}
+
+.home-resumeStep-left {
+    justify-content: right;
+}
+
+.home-resumeStep-right,
+.home-resumeStep-left {
+    display: flex;
+    align-items: center;
+    color: #FF5C00;
+}
+
+.home-resumeStep-number {
+    font-size: 55px;
+    font-weight: bold;
+    padding: 0 1rem 0 4rem;
+}
+
+.home-resumeStep-step-title {
+    font-size: 25px;
+    font-weight: 500;
+}
+
+
+
+.home-snapshot {
+    display: flex;
+}
+
+.home-snapshot-left-title {
+    font-size: 35px;
+    padding: 1rem 0 3rem 0;
+}
+
+.home-snapshot-right {
+    padding: 5rem 0;
+}
+
+.home-snapshot-right-desc {
+    font-size: 20px;
+    padding-bottom: 2rem;
+    font-weight: 300;
+}
+
+.home-snapshot-right-points {
+    font-size: 25px;
+    color: #FF5C00;
+}
+
+.home-snapshot-right-points-title {
+    font-weight: 600;
+}

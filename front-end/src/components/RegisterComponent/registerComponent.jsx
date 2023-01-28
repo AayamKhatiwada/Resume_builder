@@ -7,7 +7,7 @@ const RegisterComponent = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-sm-6">
-                        <img src={Image} alt="Voter_box" width="80%" className='image-style' />
+                        <img src={Image} alt="Voter_box" width="80%" className='image-style' style={{margin: "70px 20px"}}/>
                     </div>
                     <div className="col-sm-6 left-side-register">
                         <div className='text-center'>
