@@ -3,15 +3,15 @@ import './navigationComponentGuest.css';
 
 const NavigationComponentGuest = () => {
     return (
-        <div className='main-div'>
-            <div className='logo-text-div'>
+        <div className='nav-main-div'>
+            <div className='nav-logo-text-div'>
                 <img src={Logo} alt="logo" width="100px" />
-                <h2 style={{ color: "rgb(253 124 31 / 91%)" }}>Booster Up</h2>
+                <h2 className='nav-main-title'>Booster Up</h2>
             </div>
 
-            <div className='button-div'>
-                <a href="/register"><button>Sign Up</button></a>
-                <a href="/sign-in"><button>Sign In</button></a>
+            <div className='nav-button-div'>
+                <a href="/register"><button className='nav-register-btn'>Register</button></a>
+                <a href="/sign-in"><button className='nav-login-btn'>Log In</button></a>
             </div>
         </div>
     );

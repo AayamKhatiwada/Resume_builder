@@ -1,3 +1,6 @@
+
+/************ CSS First part ************/
+
 .home-main {
     padding: 4rem 12rem;
 }
@@ -13,7 +16,6 @@
 
 .home-quick-leftside-title {
     font-weight: 500;
-    width: 80%;
     font-size: 45px;
     padding-bottom: 3rem;
 }
@@ -25,11 +27,16 @@
 .home-quick-leftside-button {
     border-radius: 35px;
     background-color: #FF5C00;
-    padding: 1rem 12rem;
+    padding: 1rem 10rem;
     border: 2px solid #FF5C00;
     margin-left: 12rem;
     color: white;
-    font-size: 20px;
+    font-size: 18px;
+}
+
+.home-quick-leftside-button:hover, .home-snapshot-button:hover, .home-aboutUs-right-button:hover {
+    background-color: #ec5904;
+    color: white;
 }
 
 .home-quick-rightside {
@@ -42,6 +49,8 @@
     padding-bottom: 9rem;
 }
 
+
+/************ CSS Second part ************/
 
 .home-resumeStep {
     display: flex;
@@ -82,6 +91,8 @@
 }
 
 
+/************ CSS Third part ************/
+
 
 .home-snapshot {
     display: flex;
@@ -109,4 +120,215 @@
 
 .home-snapshot-right-points-title {
     font-weight: 600;
+}
+
+.home-snapshot-button {
+    border-radius: 35px;
+    background-color: #FF5C00;
+    border: 2px solid #FF5C00;
+    color: white;
+    padding: 1rem 5rem;
+    margin-top: 6rem;
+    margin-left: 4rem;
+}
+
+.home-snapshot-our-stats {
+    font-size: 20px;
+    font-weight: 200;
+    padding: 2rem 0;
+    margin-left: 4rem;
+}
+
+.home-snapshot-stats {
+    display: flex;
+    margin-left: 4rem;
+}
+
+.home-snapshot-users {
+    padding-right: 2rem;
+    border-right: 1px solid;
+}
+
+.home-snapshot-users-number,
+.home-snapshot-time-min {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.home-snapshot-users-name,
+.home-snapshot-time-avg {
+    font-weight: 300;
+}
+
+.home-snapshot-time {
+    padding-left: 2rem;
+}
+
+
+/************ CSS Fourth part ************/
+
+.home-pickTemplate {
+    margin: 10rem 5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.home-pickTemplate-leftside-title {
+    font-size: 46px;
+    font-weight: 500;
+}
+
+.home-pickTemplate-leftside-label {
+    font-size: 20px;
+    padding: 1rem 0 5rem 0;
+    color: #FF5C00;
+}
+
+.home-pickTemplate-leftside-desc {
+    width: 80%;
+    font-weight: 350;
+    font-size: 17px;
+}
+
+.home-pickTemplate-rightside {
+    padding: 11rem 0;
+}
+
+
+
+/************ CSS Fifth part ************/
+
+.home-aboutUs-title {
+    font-size: 40px;
+    font-weight: 500;
+    text-align: center;
+    padding: 4rem;
+}
+
+.home-aboutUs-detail {
+    display: flex;
+    padding: 0 7rem;
+}
+
+.home-aboutUs-right-desc {
+    width: 80%;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.5;
+    padding: 1rem 0;
+}
+
+.home-aboutUs-right-button {
+    border-radius: 35px;
+    background-color: #FF5C00;
+    border: 2px solid #FF5C00;
+    color: white;
+    padding: 1rem 5rem;
+    margin-top: 3rem;
+}
+
+
+/************ CSS Sixth part ************/
+
+.home-benefits {
+    margin: 10rem 5rem;
+}
+
+.home-benefits-title {
+    text-align: center;
+    font-size: 45px;
+    font-weight: 500;
+}
+
+.home-benefits-label {
+    font-size: 25px;
+    color: #FF5C00;
+    text-align: center;
+    padding: 1rem 0 5rem 0;
+}
+
+.home-benefits-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.home-benefits-details-item {
+    display: flex;
+    padding: 4rem;
+}
+
+.home-benefits-details-item-body {
+    text-align: center;
+    padding: 0 3rem;
+}
+
+.home-benefits-details-item-body-title {
+    font-size: 25px;
+    padding-bottom: 3rem;
+    font-weight: 500;
+}
+
+.home-benefits-details-item-body-desc {
+    font-weight: 300;
+}
+
+.home-testimonials {
+    margin-bottom: 10rem;
+}
+
+.home-testimonials-up {
+    display: flex;
+}
+
+.home-testimonials-up-left {
+    padding: 4rem 0;
+}
+
+.home-testimonials-up-left-title {
+    font-weight: 500;
+    font-size: 44px;
+}
+
+.home-testimonials-up-left-label {
+    font-size: 20px;
+    color: #FF5C00;
+    padding: 1rem 0;
+    font-weight: 300;
+}
+
+.home-testimonials-card {
+    border: 1px solid white;
+    box-shadow: 1px 3px 5px grey;
+    border-radius: 5px;
+    padding: 4rem;
+}
+
+.home-testimonials-down {
+    display: flex;
+    justify-content: space-around;
+    padding: 6rem 0;
+}
+
+.home-testimonials-card-top {
+    display: flex;
+    align-items: center;
+    padding-bottom: 2rem;
+}
+
+.home-testimonials-card-top-details {
+    padding: 2rem;
+}
+
+.home-testimonials-card-top-title {
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.home-testimonials-card-top-label {
+    color: #FF5C00;
+}
+
+.home-testimonials-card-down {
+    line-height: 2;
 }

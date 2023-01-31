@@ -1,18 +1,44 @@
-.main-div{
+.nav-main-div {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 15px 50px;
 }
 
-.logo-text-div{
+.nav-logo-text-div {
     display: flex;
+    align-items: center;
 }
 
-.button-div a button{
+.nav-main-title{
+    color: #FF5C00;
+    padding: 0 5rem;
+}
+
+.nav-register-btn {
     border-radius: 35px;
     background-color: white;
     padding: 10px 40px;
-    border: 2px solid #ff4911;
+    border: 2px solid #FF5C00;
     margin-left: 20px;
     color: black;
+}
+
+.nav-register-btn:hover {
+    background-color: #FF5C00;
+    color: white;
+}
+
+.nav-login-btn {
+    border-radius: 35px;
+    background-color: #FF5C00;
+    padding: 10px 40px;
+    border: 2px solid #FF5C00;
+    margin-left: 20px;
+    color: white;
+}
+
+.nav-login-btn:hover {
+    background-color: #ec5904;
+    color: white;
 }

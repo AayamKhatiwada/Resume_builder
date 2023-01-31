@@ -97,7 +97,7 @@ const HomeComponent = () => {
                         <div className="home-snapshot-left-title">
                             Snapshot of our simple-to-use editor
                         </div>
-                        <img src={ResumeTemplate1} alt="Resume template 1" />
+                        <img src={ResumeTemplate1} alt="Resume template 1" width="90%" />
                     </div>
 
                     <div className="home-snapshot-right col-sm-6">
@@ -158,7 +158,7 @@ const HomeComponent = () => {
                 </div>
 
                 <div className="home-pickTemplate">
-                    <div className="home-pickTemplate-leftside">
+                    <div className="home-pickTemplate-leftside col-sm-5">
                         <div className="home-pickTemplate-leftside-title">
                             You can always pick
                             any templates you like
@@ -171,22 +171,22 @@ const HomeComponent = () => {
                         </div>
                     </div>
 
-                    <div className="home-pickTemplate-rightside">
-                        <img src={GroupResume} alt="Group Resume" />
+                    <div className="home-pickTemplate-rightside col-sm-6">
+                        <img src={GroupResume} alt="Group Resume" width="100%" />
                     </div>
                 </div>
 
                 <div className="home-aboutUs">
                     <div className="home-aboutUs-title">
-                        About Us
+                        About Booster Up
                     </div>
 
                     <div className="home-aboutUs-detail">
-                        <div className="home-aboutUs-left">
-                            <img src={AboutUs} alt="About Us" />
+                        <div className="home-aboutUs-left col-sm-6">
+                            <img src={AboutUs} alt="About Us" width="100%" />
                         </div>
 
-                        <div className="home-aboutUs-right">
+                        <div className="home-aboutUs-right col-sm-6">
                             <div className="home-aboutUs-right-desc">
                                 Booster Up is a product of boosting all the previous work and capabilities with in a piece of paper. Booster Up was born of the need to create a new way for job-seekers to connect with recruiters. Hence, our best hands got to work with one thing in mind: to help you find a great job faster. We went even further to ensure that our Template designs meet your expectation. With us, you can spin out an impressive resume that makes a memorable first impression!
                             </div>
@@ -206,8 +206,8 @@ const HomeComponent = () => {
                         Why Choose Us?
                     </div>
                     <div className="home-benefits-details">
-                        <div className="home-benefits-details-item">
-                            <img src={Benefits1} alt="Benefits 1" />
+                        <div className="home-benefits-details-item col-sm-4">
+                            <img src={Benefits1} alt="Benefits 1" style={{ objectFit: "contain" }} />
                             <div className="home-benefits-details-item-body">
                                 <div className="home-benefits-details-item-body-title">
                                     Easy to use
@@ -220,8 +220,8 @@ const HomeComponent = () => {
                             </div>
                         </div>
 
-                        <div className="home-benefits-details-item">
-                            <img src={Benefits2} alt="Benefits 2" />
+                        <div className="home-benefits-details-item col-sm-4">
+                            <img src={Benefits2} alt="Benefits 2" style={{ objectFit: "contain" }} />
                             <div className="home-benefits-details-item-body">
                                 <div className="home-benefits-details-item-body-title">
                                     Secure
@@ -234,8 +234,8 @@ const HomeComponent = () => {
                             </div>
                         </div>
 
-                        <div className="home-benefits-details-item">
-                            <img src={Benefits3} alt="Benefits 3" />
+                        <div className="home-benefits-details-item col-sm-4">
+                            <img src={Benefits3} alt="Benefits 3" style={{ objectFit: "contain" }} />
                             <div className="home-benefits-details-item-body">
                                 <div className="home-benefits-details-item-body-title">
                                     Cool Templates
@@ -247,8 +247,8 @@ const HomeComponent = () => {
                             </div>
                         </div>
 
-                        <div className="home-benefits-details-item">
-                            <img src={Benefits4} alt="Benefits 4" />
+                        <div className="home-benefits-details-item col-sm-5">
+                            <img src={Benefits4} alt="Benefits 4" style={{ objectFit: "contain" }} />
                             <div className="home-benefits-details-item-body">
                                 <div className="home-benefits-details-item-body-title">
                                     Intelligent
@@ -263,8 +263,8 @@ const HomeComponent = () => {
                             </div>
                         </div>
 
-                        <div className="home-benefits-details-item">
-                            <img src={Benefits5} alt="Benefits 5" />
+                        <div className="home-benefits-details-item col-sm-5">
+                            <img src={Benefits5} alt="Benefits 5" style={{ objectFit: "contain" }} />
                             <div className="home-benefits-details-item-body">
                                 <div className="home-benefits-details-item-body-title">
                                     No Hidden
@@ -282,7 +282,7 @@ const HomeComponent = () => {
 
                 <div className="home-testimonials">
                     <div className="home-testimonials-up">
-                        <div className="home-testimonials-up-left">
+                        <div className="home-testimonials-up-left col-sm-4">
                             <div className="home-testimonials-up-left-title">
                                 Testimonials From Our Previous Users
                             </div>
@@ -291,7 +291,7 @@ const HomeComponent = () => {
                             </div>
                         </div>
 
-                        <div className="home-testimonials-card">
+                        <div className="home-testimonials-card col-sm-5">
                             <div className="home-testimonials-card-top">
                                 <img src={Testimonial1} alt="Testimonials 1" />
                                 <div className="home-testimonials-card-top-details">
@@ -303,11 +303,15 @@ const HomeComponent = () => {
                                     </div>
                                 </div>
                             </div>
+                            <div className="home-testimonials-card-down">
+                                We move with make a Creative Strategy for help your
+                                goal, we help to improve your income by a services,
+                            </div>
                         </div>
                     </div>
 
                     <div className="home-testimonials-down">
-                        <div className="home-testimonials-card">
+                        <div className="home-testimonials-card col-sm-5">
                             <div className="home-testimonials-card-top">
                                 <img src={Testimonial1} alt="Testimonials 1" />
                                 <div className="home-testimonials-card-top-details">
@@ -319,8 +323,13 @@ const HomeComponent = () => {
                                     </div>
                                 </div>
                             </div>
+                            <div className="home-testimonials-card-down">
+                                This is the best resume builder that I have come across so far,
+                                getting across, it is user friendly and also HR approved,
+                                I got my first job using this template.
+                            </div>
                         </div>
-                        <div className="home-testimonials-card">
+                        <div className="home-testimonials-card col-sm-5">
                             <div className="home-testimonials-card-top">
                                 <img src={Testimonial1} alt="Testimonials 1" />
                                 <div className="home-testimonials-card-top-details">
@@ -331,6 +340,11 @@ const HomeComponent = () => {
                                         Web Developer
                                     </div>
                                 </div>
+                            </div>
+                            <div className="home-testimonials-card-down">
+                                The experience is just smooth and adaptable,
+                                I was called up for an interview I applied with using future resume and my resume was naturally commended.
+                                Thanks Future Resume.
                             </div>
                         </div>
                     </div>
