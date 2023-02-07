@@ -25,3 +25,7 @@ input{
 .image-style{
     margin: 150px 80px 80px 80px;
 }
+
+.form-text-field{
+    padding-bottom: 2rem;
+}
