@@ -1,0 +1,42 @@
+.createResume {
+    margin: 3rem;
+}
+
+.createResume-header {
+    display: flex;
+    align-items: center;
+}
+
+.createResume-options {
+    display: flex;
+}
+
+.createResume-title {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.createResume-save{
+    margin: 1rem;
+    background-color: #FF5C00;
+    color: white;
+    padding: 1rem 3rem;
+    border-radius: 70px;
+}
+
+.createResume-secondPart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.k-editor-content{
+    margin: 0 30rem;
+    background-color: white;
+}
+
+.k-editor{
+    background-color: rgb(214, 214, 214) !important;
+    border: none !important;
+    box-shadow: 1px 3px 5px rgb(82, 82, 82) !important;
+}

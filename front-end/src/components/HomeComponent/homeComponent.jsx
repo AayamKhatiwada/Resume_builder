@@ -16,6 +16,7 @@ import Benefits3 from '../assets/Benefits_3.png'
 import Benefits4 from '../assets/Benefits_4.png'
 import Benefits5 from '../assets/Benefits_5.png'
 import Testimonial1 from '../assets/testimonials_1.png'
+import { Link } from 'react-router-dom';
 
 const HomeComponent = () => {
     return (
@@ -32,9 +33,9 @@ const HomeComponent = () => {
                             Build a resume thats piques the interest of recruiters and
                             gets you hired. It's fast and easy to use.
                         </div>
-                        <button className="home-quick-leftside-button">
+                        <Link className="home-quick-leftside-button link" to={"/createResume"}>
                             Quick Create
-                        </button>
+                        </Link>
                     </div>
                     <div className="home-quick-rightside col-sm-6">
                         <img src={ResumeTemplate} alt="Resume Template" />
