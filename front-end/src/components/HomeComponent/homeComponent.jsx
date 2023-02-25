@@ -33,7 +33,7 @@ const HomeComponent = () => {
                             Build a resume thats piques the interest of recruiters and
                             gets you hired. It's fast and easy to use.
                         </div>
-                        <Link className="home-quick-leftside-button link" to={"/createResume"}>
+                        <Link className="home-quick-leftside-button link" to={"/optionFor"}>
                             Quick Create
                         </Link>
                     </div>

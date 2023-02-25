@@ -1,0 +1,61 @@
+.navbar {
+    padding: 20px 0;
+    background-color: #f8f8f8;
+}
+
+.navbar-header {
+    margin-left: -15px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+}
+
+.navbar-brand img {
+    max-width: 100%;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.navbar-form {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.form-control {
+    display: inline-block;
+    width: 60rem !important;
+    height: 50px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: none;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+}
+
+.btn-search {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 25px;
+    border: none;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    margin-left: -50px;
+}
+
+.recommendation-title {
+    font-size: 40px;
+    color: orange;
+    padding: 2rem 3rem;
+}

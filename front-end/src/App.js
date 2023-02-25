@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegisterPage from './routes/registerPage';
 import SigninPage from './routes/signinPage';
 import CreateResumePage from './routes/createResumePage';
+import OptionPage from './routes/optionPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/sign-in" element={<SigninPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/createResume" element={<CreateResumePage />} />
+          <Route path="/optionFor" element={<OptionPage />} />
         </Routes>
       </BrowserRouter>
     </div>
