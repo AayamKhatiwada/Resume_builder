@@ -3,10 +3,13 @@ import Image from '../assets/resume_builder.jpg';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
+import { useDispatch } from 'react-redux';
+import { setCurrentUser, setUserError } from '../../store/user/user-action';
 
 const RegisterComponent = () => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [fname, setFname] = useState("");
     const [lname, setLname] = useState("");
@@ -14,7 +17,6 @@ const RegisterComponent = () => {
     const [password, setPassword] = useState("");
     const [cpassword, setCpassword] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
-    const [error, seterror] = useState();
 
     const register = async () => {
         let user = { fname, lname, email, phoneNo, password };
@@ -29,10 +31,11 @@ const RegisterComponent = () => {
             });
             result = await result.json();
             if (result['error']) {
-                seterror(result['error']);
+                dispatch(setUserError(result['error']));
                 alert(result['error'])
             } else if (result['user']) {
                 alert("success")
+                dispatch(setCurrentUser(result['user']));
                 navigate('/');
             }
         } else {

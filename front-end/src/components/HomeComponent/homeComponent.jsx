@@ -19,6 +19,7 @@ import Testimonial1 from '../assets/testimonials_1.png'
 import { Link } from 'react-router-dom';
 
 const HomeComponent = () => {
+
     return (
         <div>
             <NavigationComponentGuest />

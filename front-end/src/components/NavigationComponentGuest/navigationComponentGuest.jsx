@@ -1,7 +1,19 @@
+import { useDispatch, useSelector } from 'react-redux';
+import IsAuthed from '../../hooks/isAuthed';
+import { removeUser } from '../../store/user/user-action';
+import { selectCurrentUser } from '../../store/user/user-selector';
 import Logo from '../assets/logo.png';
 import './navigationComponentGuest.css';
 
 const NavigationComponentGuest = () => {
+
+    const dispatch = useDispatch();
+    const user = useSelector(selectCurrentUser);
+
+    const logout = () => {
+        dispatch(removeUser())
+    }
+
     return (
         <div className='nav-main-div'>
             <div className='nav-logo-text-div'>
@@ -10,8 +22,18 @@ const NavigationComponentGuest = () => {
             </div>
 
             <div className='nav-button-div'>
-                <a href="/register"><button className='nav-register-btn'>Register</button></a>
-                <a href="/sign-in"><button className='nav-login-btn'>Log In</button></a>
+                {
+                    IsAuthed(user) ? (
+                        <>
+                            <a href="/register"><button className='nav-register-btn'>Register</button></a>
+                            <a href="/sign-in"><button className='nav-login-btn'>Log In</button></a>
+                        </>
+                    ) : (
+                        <button className='nav-login-btn' onClick={logout}>Log Out</button>
+
+                    )
+                }
+
             </div>
         </div>
     );

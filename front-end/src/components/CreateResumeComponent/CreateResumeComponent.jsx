@@ -50,8 +50,25 @@ const {
 const CreateResumeComponent = () => {
     const [content, setContent] = useState("")
 
-    const saveToDatabase = () => {
-        console.log(JSON.stringify(content))
+    const saveToDatabase = async () => {
+        // console.log(JSON.stringify(content))
+
+        let resume = { user_id: "1", data: JSON.stringify(content) };
+        let result = await fetch("http://127.0.0.1:8000/api/saveResume", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            body: JSON.stringify(resume)
+        });
+        result = await result.json();
+        console.log(result)
+        if (result['error']) {
+            alert(result['error'])
+        } else if (result['resume']) {
+            console.log(result['resume'])
+        }
     }
     return (
         <div className='createResume'>

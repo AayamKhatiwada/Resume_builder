@@ -2,11 +2,14 @@ import './signinComponent.css';
 import Image from '../assets/login_image.svg';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setCurrentUser, setUserError } from '../../store/user/user-action';
 
 const SigninComponent = () => {
 
     const navigate = useNavigate();
     // const [error, seterror] = useState();
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -23,8 +26,10 @@ const SigninComponent = () => {
         });
         result = await result.json();
         if (result['error']) {
+            dispatch(setUserError(result['error']));
             alert(result['error']);
         } else if (result['user']) {
+            dispatch(setCurrentUser(result['user']));
             alert("success")
             navigate('/');
         }
