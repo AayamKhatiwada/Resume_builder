@@ -16,7 +16,20 @@
     font-weight: 500;
 }
 
+.createResume-options{
+    display: flex;
+    flex-direction: row;
+}
+
 .createResume-save{
+    margin: 1rem;
+    background-color: #FF5C00;
+    color: white;
+    padding: 1rem 3rem;
+    border-radius: 70px;
+}
+
+.createResume-download{
     margin: 1rem;
     background-color: #FF5C00;
     color: white;

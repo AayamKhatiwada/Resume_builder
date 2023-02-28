@@ -1,8 +1,9 @@
 import './CreateResumeComponent.css'
-import { Editor, EditorTools } from '@progress/kendo-react-editor';
-import { useState } from 'react';
+import { Editor, EditorTools, EditorUtils } from "@progress/kendo-react-editor";
+import { createRef, useState } from 'react';
 import '@progress/kendo-theme-default/dist/all.css';
 import CreateResumeImage from '../assets/createresume_image.jpeg'
+import { savePDF } from "@progress/kendo-react-pdf";
 
 const {
     Bold,
@@ -48,12 +49,11 @@ const {
 } = EditorTools;
 
 const CreateResumeComponent = () => {
-    const [content, setContent] = useState("")
+    const content = createRef();
 
     const saveToDatabase = async () => {
         // console.log(JSON.stringify(content))
-
-        let resume = { user_id: "1", data: JSON.stringify(content) };
+        let resume = { user_id: "1", data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)) };
         let result = await fetch("http://127.0.0.1:8000/api/saveResume", {
             method: "POST",
             headers: {
@@ -70,6 +70,19 @@ const CreateResumeComponent = () => {
             console.log(result['resume'])
         }
     }
+
+    const downloadresume = () => {
+        var wrapper = document.createElement('div');
+        wrapper.innerHTML = EditorUtils.getHtml(content.current.view.state);
+        console.log(wrapper)
+
+        savePDF(wrapper, {
+            paperSize: "auto",
+            margin: 40,
+            fileName: `Report for ${new Date().getFullYear()}`
+        });
+    }
+
     return (
         <div className='createResume'>
             <div className="createResume-header">
@@ -80,8 +93,13 @@ const CreateResumeComponent = () => {
                     <div className="createResume-title">
                         Random C.V.
                     </div>
-                    <div className="createResume-save" onClick={saveToDatabase}>
-                        Save
+                    <div className='createResume-options'>
+                        <div className="createResume-save" onClick={saveToDatabase}>
+                            Save
+                        </div>
+                        <div className="createResume-download" onClick={downloadresume}>
+                            Download
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,7 +126,7 @@ const CreateResumeComponent = () => {
                     [MergeCells, SplitCell],
                 ]} contentStyle={{
                     height: 630
-                }} value={content} onChange={(e) => { setContent(e.target.value) }} />
+                }} ref={content} />
             </div>
         </div>
     );
