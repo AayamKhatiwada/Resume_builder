@@ -3,7 +3,7 @@ import { Editor, EditorTools, EditorUtils } from "@progress/kendo-react-editor";
 import { createRef, useState } from 'react';
 import '@progress/kendo-theme-default/dist/all.css';
 import CreateResumeImage from '../assets/createresume_image.jpeg'
-import { savePDF } from "@progress/kendo-react-pdf";
+import { jsPDF } from "jspdf";
 
 const {
     Bold,
@@ -52,8 +52,7 @@ const CreateResumeComponent = () => {
     const content = createRef();
 
     const saveToDatabase = async () => {
-        // console.log(JSON.stringify(content))
-        let resume = { user_id: "1", data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)) };
+        let resume = { user_id: "1",title: "document", data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)) };
         let result = await fetch("http://127.0.0.1:8000/api/saveResume", {
             method: "POST",
             headers: {
@@ -75,11 +74,18 @@ const CreateResumeComponent = () => {
         var wrapper = document.createElement('div');
         wrapper.innerHTML = EditorUtils.getHtml(content.current.view.state);
         console.log(wrapper)
+        const doc = new jsPDF();
 
-        savePDF(wrapper, {
-            paperSize: "auto",
-            margin: 40,
-            fileName: `Report for ${new Date().getFullYear()}`
+        doc.html(wrapper, {
+            callback: function(doc){
+                doc.save("document.pdf");
+            },
+            margin: [10,10,10,10],
+            autoPaging: "text",
+            x: 0,
+            y: 0,
+            width: 190,
+            windowWidth: 675
         });
     }
 
