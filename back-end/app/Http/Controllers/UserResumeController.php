@@ -50,9 +50,9 @@ class UserResumeController extends Controller
      * @param  \App\Models\UserResume  $userResume
      * @return \Illuminate\Http\Response
      */
-    public function show(UserResume $userResume)
+    public function show(Request $request)
     {
-        //
+        return UserResume::all();
     }
 
     /**

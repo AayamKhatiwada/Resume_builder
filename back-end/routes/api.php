@@ -25,3 +25,6 @@ Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 
 Route::post('saveResume', [UserResumeController::class, 'store']);
+
+
+Route::get('getResume', [UserResumeController::class, 'show']);

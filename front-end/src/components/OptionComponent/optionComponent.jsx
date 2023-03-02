@@ -40,7 +40,7 @@ const OptionComponent = () => {
                                 <div className="card">
                                     <img src={DocBlank} alt="Random Image" className="card-img-top" width="180px" />
                                     <div className="card-body">
-                                        <h5 className="card-title" style={{color: "black"}}>Recommended Product 1</h5>
+                                        <h5 className="card-title" style={{ color: "black" }}>New Resume</h5>
                                     </div>
                                 </div>
                             </Link>
@@ -50,22 +50,6 @@ const OptionComponent = () => {
                                 <img src={DocBlank} alt="Random Image" className="card-img-top" width="180px" />
                                 <div className="card-body">
                                     <h5 className="card-title">Recommended Product 2</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-sm-3 mb-4">
-                            <div className="card">
-                                <img src={DocBlank} alt="Random Image" className="card-img-top" width="180px" />
-                                <div className="card-body">
-                                    <h5 className="card-title">Recommended Product 3</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-sm-2 mb-4">
-                            <div className="card">
-                                <img src={DocBlank} alt="Random Image" className="card-img-top" width="180px" />
-                                <div className="card-body">
-                                    <h5 className="card-title">Recommended Product 3</h5>
                                 </div>
                             </div>
                         </div>
