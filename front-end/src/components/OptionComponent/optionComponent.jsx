@@ -1,9 +1,23 @@
 import './optionComponent.css';
 import DocBlank from '../assets/doc-blank.png'
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const OptionComponent = () => {
+    const [dummyResume, setDummyResume] = useState()
 
+    useEffect(() => {
+        fetch("http://127.0.0.1:8000/api/getResume")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setDummyResume(result)
+                },
+                (error) => {
+                    console.log(error)
+                }
+            )
+    }, [])
     return (
         <>
             <nav className="navbar navbar-default navbar-fixed-top">
@@ -45,14 +59,20 @@ const OptionComponent = () => {
                                 </div>
                             </Link>
                         </div>
-                        <div className="col-sm-3 mb-4">
-                            <div className="card">
-                                <img src={DocBlank} alt="Random Image" className="card-img-top" width="180px" />
-                                <div className="card-body">
-                                    <h5 className="card-title">Recommended Product 2</h5>
-                                </div>
-                            </div>
-                        </div>
+                        {
+                            dummyResume?.map(() => {
+                                return (
+                                    <div className="col-sm-3 mb-4">
+                                        <div className="card">
+                                            <img src={DocBlank} alt="Random Image" className="card-img-top" width="180px" />
+                                            <div className="card-body">
+                                                <h5 className="card-title">Recommended Product 2</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })
+                        }
                     </div>
                 </div>
             </section>

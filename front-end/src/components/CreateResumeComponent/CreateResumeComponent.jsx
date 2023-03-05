@@ -50,9 +50,10 @@ const {
 
 const CreateResumeComponent = () => {
     const content = createRef();
+    const [documentName, setDocumentName] = useState("Document");
 
     const saveToDatabase = async () => {
-        let resume = { user_id: "1",title: "document", data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)) };
+        let resume = { user_id: "1", title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName, data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)) };
         let result = await fetch("http://127.0.0.1:8000/api/saveResume", {
             method: "POST",
             headers: {
@@ -77,10 +78,10 @@ const CreateResumeComponent = () => {
         const doc = new jsPDF();
 
         doc.html(wrapper, {
-            callback: function(doc){
-                doc.save("document.pdf");
+            callback: function (doc) {
+                doc.save(`${documentName}.pdf`);
             },
-            margin: [10,10,10,10],
+            margin: [10, 10, 10, 10],
             autoPaging: "text",
             x: 0,
             y: 0,
@@ -97,7 +98,7 @@ const CreateResumeComponent = () => {
                 </div>
                 <div className="createResume-secondPart col-sm-11">
                     <div className="createResume-title">
-                        Random C.V.
+                        <input type="text" value={documentName} onChange={(e) => setDocumentName(e.target.value)} />
                     </div>
                     <div className='createResume-options'>
                         <div className="createResume-save" onClick={saveToDatabase}>

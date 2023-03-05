@@ -5,6 +5,7 @@ import RegisterPage from './routes/registerPage';
 import SigninPage from './routes/signinPage';
 import CreateResumePage from './routes/createResumePage';
 import OptionPage from './routes/optionPage';
+import WithoutAuthOnly from './hooks/withoutAuthOnly';
 
 function App() {
   return (
@@ -12,8 +13,16 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<HomePage />} />
-          <Route path="/sign-in" element={<SigninPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/sign-in" element={
+            <WithoutAuthOnly>
+              <SigninPage />
+            </WithoutAuthOnly>
+          } />
+          <Route path="/register" element={
+            <WithoutAuthOnly>
+              <RegisterPage />
+            </WithoutAuthOnly>
+          } />
           <Route path="/createResume" element={<CreateResumePage />} />
           <Route path="/optionFor" element={<OptionPage />} />
         </Routes>
