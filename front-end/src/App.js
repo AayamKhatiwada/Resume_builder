@@ -23,7 +23,7 @@ function App() {
               <RegisterPage />
             </WithoutAuthOnly>
           } />
-          <Route path="/createResume" element={<CreateResumePage />} />
+          <Route path="/createResume/:slugPara" element={<CreateResumePage />} />
           <Route path="/optionFor" element={<OptionPage />} />
         </Routes>
       </BrowserRouter>

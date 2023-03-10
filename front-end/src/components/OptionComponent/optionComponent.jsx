@@ -2,8 +2,11 @@ import './optionComponent.css';
 import DocBlank from '../assets/doc-blank.png'
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setCurrentResume } from '../../store/resume/resume-action';
 
 const OptionComponent = () => {
+    const dispatch = useDispatch();
     const [dummyResume, setDummyResume] = useState()
 
     useEffect(() => {
@@ -11,6 +14,7 @@ const OptionComponent = () => {
             .then(res => res.json())
             .then(
                 (result) => {
+                    dispatch(setCurrentResume(result));
                     setDummyResume(result)
                 },
                 (error) => {
@@ -18,6 +22,7 @@ const OptionComponent = () => {
                 }
             )
     }, [])
+    console.log(dummyResume)
     return (
         <>
             <nav className="navbar navbar-default navbar-fixed-top">
@@ -60,16 +65,18 @@ const OptionComponent = () => {
                             </Link>
                         </div>
                         {
-                            dummyResume?.map(() => {
+                            dummyResume?.map((resume) => {
                                 return (
-                                    <div className="col-sm-3 mb-4">
-                                        <div className="card">
-                                            <img src={DocBlank} alt="Random Image" className="card-img-top" width="180px" />
-                                            <div className="card-body">
-                                                <h5 className="card-title">Recommended Product 2</h5>
+                                    <Link to={`/createResume/${resume.id}`} key={resume.id}>
+                                        <div className="col-sm-3 mb-4">
+                                            <div className="card">
+                                                <img src={DocBlank} alt="Random Image" className="card-img-top" width="180px" />
+                                                <div className="card-body">
+                                                    <h5 className="card-title">{resume.title}</h5>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 );
                             })
                         }
