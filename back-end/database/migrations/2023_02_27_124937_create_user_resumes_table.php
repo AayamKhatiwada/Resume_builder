@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('user_resumes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->text('slug');
             $table->string('title');
             $table->text('ResumeData');
             $table->rememberToken();

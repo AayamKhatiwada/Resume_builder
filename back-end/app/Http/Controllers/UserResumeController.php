@@ -35,11 +35,15 @@ class UserResumeController extends Controller
      */
     public function store(Request $request)
     {
-        $resume = new UserResume();
-        $resume->user_id = $request->input('user_id');
-        $resume->title = $request->input('title');
-        $resume->ResumeData = $request->input('data');
-        $resume->save();
+        $resume = UserResume::updateOrCreate(
+            ['slug' => $request->input('slug')], // find resume by slug
+            [
+                'user_id' => $request->input('user_id'),
+                'title' => $request->input('title'),
+                'slug' => $request->input('slug'),
+                'ResumeData' => $request->input('data')
+            ] // update or create a new resume
+        );
 
         return ["resume" => $resume];
     }

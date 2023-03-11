@@ -2,12 +2,15 @@ import './optionComponent.css';
 import DocBlank from '../assets/doc-blank.png'
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import makeslug from '../../hooks/randomGenerator';
+import { selectCurrentResume } from '../../store/resume/resume-selector';
 import { setCurrentResume } from '../../store/resume/resume-action';
 
 const OptionComponent = () => {
+    const dummyResume = useSelector(selectCurrentResume)
+    const randomSlug = makeslug();
     const dispatch = useDispatch();
-    const [dummyResume, setDummyResume] = useState()
 
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/getResume")
@@ -15,14 +18,13 @@ const OptionComponent = () => {
             .then(
                 (result) => {
                     dispatch(setCurrentResume(result));
-                    setDummyResume(result)
                 },
                 (error) => {
                     console.log(error)
                 }
             )
     }, [])
-    console.log(dummyResume)
+
     return (
         <>
             <nav className="navbar navbar-default navbar-fixed-top">
@@ -55,7 +57,7 @@ const OptionComponent = () => {
                     <div className='recommendation-title'>Create new or choose template</div>
                     <div className="row">
                         <div className="col-sm-3 mb-4">
-                            <Link to={'/createResume'}>
+                            <Link to={`/createResume/${randomSlug}`}>
                                 <div className="card">
                                     <img src={DocBlank} alt="Random Image" className="card-img-top" width="180px" />
                                     <div className="card-body">
@@ -67,7 +69,7 @@ const OptionComponent = () => {
                         {
                             dummyResume?.map((resume) => {
                                 return (
-                                    <Link to={`/createResume/${resume.id}`} key={resume.id}>
+                                    <Link to={`/createResume/${resume.slug}`} key={resume.id}>
                                         <div className="col-sm-3 mb-4">
                                             <div className="card">
                                                 <img src={DocBlank} alt="Random Image" className="card-img-top" width="180px" />

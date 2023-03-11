@@ -1,9 +1,13 @@
 import './CreateResumeComponent.css'
 import { Editor, EditorTools, EditorUtils } from "@progress/kendo-react-editor";
-import { createRef, useState } from 'react';
+import { createRef, useEffect, useState } from 'react';
 import '@progress/kendo-theme-default/dist/all.css';
 import CreateResumeImage from '../assets/createresume_image.jpeg'
 import { jsPDF } from "jspdf";
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectCurrentResume } from '../../store/resume/resume-selector';
+import { SuccessNoty } from '../../hooks/notifications';
 
 const {
     Bold,
@@ -50,10 +54,24 @@ const {
 
 const CreateResumeComponent = () => {
     const content = createRef();
+    const { slugPara } = useParams();
     const [documentName, setDocumentName] = useState("Document");
+    const allResumeData = useSelector(selectCurrentResume);
+    console.log(allResumeData)
+
+    useEffect(() => {
+        allResumeData.map((data) => {
+            if (data.slug === slugPara) {
+                setDocumentName(data.title)
+                EditorUtils.setHtml(content.current.view, JSON.parse(data.ResumeData));
+                console.log(data.slug === slugPara)
+                console.log(data.title)
+            }
+        })
+    }, [allResumeData])
 
     const saveToDatabase = async () => {
-        let resume = { user_id: "1", title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName, data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)) };
+        let resume = { user_id: "1", slug: slugPara, title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName, data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)) };
         let result = await fetch("http://127.0.0.1:8000/api/saveResume", {
             method: "POST",
             headers: {
@@ -63,7 +81,7 @@ const CreateResumeComponent = () => {
             body: JSON.stringify(resume)
         });
         result = await result.json();
-        console.log(result)
+        SuccessNoty("Data has been stored")
         if (result['error']) {
             alert(result['error'])
         } else if (result['resume']) {

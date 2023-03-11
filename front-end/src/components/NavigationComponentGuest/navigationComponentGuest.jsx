@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import IsAuthed from '../../hooks/isAuthed';
+import { SuccessNoty } from '../../hooks/notifications';
 import { removeUser } from '../../store/user/user-action';
 import { selectCurrentUser } from '../../store/user/user-selector';
 import Logo from '../assets/logo.png';
@@ -11,6 +12,7 @@ const NavigationComponentGuest = () => {
     const user = useSelector(selectCurrentUser);
 
     const logout = () => {
+        SuccessNoty("Logout Successful")
         dispatch(removeUser())
     }
 

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser, setUserError } from '../../store/user/user-action';
+import { ErrorNoty, SuccessNoty } from '../../hooks/notifications';
 
 const SigninComponent = () => {
 
@@ -27,10 +28,10 @@ const SigninComponent = () => {
         result = await result.json();
         if (result['error']) {
             dispatch(setUserError(result['error']));
-            alert(result['error']);
+            ErrorNoty(result['error'])
         } else if (result['user']) {
             dispatch(setCurrentUser(result['user']));
-            alert("success")
+            SuccessNoty("Login Successful")
             navigate('/');
         }
     }

@@ -6,6 +6,7 @@ import SigninPage from './routes/signinPage';
 import CreateResumePage from './routes/createResumePage';
 import OptionPage from './routes/optionPage';
 import WithoutAuthOnly from './hooks/withoutAuthOnly';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/optionFor" element={<OptionPage />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </div>
   );
 }
