@@ -88,7 +88,6 @@ const CreateResumeComponent = () => {
             console.log(result['resume'])
         }
     }
-    
 
     const downloadresume = () => {
         var wrapper = document.createElement('div');
