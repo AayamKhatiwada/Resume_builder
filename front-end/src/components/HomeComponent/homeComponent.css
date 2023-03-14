@@ -1,8 +1,7 @@
-
 /************ CSS First part ************/
 
 .home-main {
-    padding: 4rem 12rem;
+    padding: 2rem 6rem;
 }
 
 .home-quick {
@@ -17,7 +16,7 @@
 .home-quick-leftside-title {
     font-weight: 500;
     font-size: 45px;
-    padding-bottom: 3rem;
+    padding-bottom: 2rem;
 }
 
 .home-color-orange {
@@ -27,14 +26,16 @@
 .home-quick-leftside-button {
     border-radius: 35px;
     background-color: #FF5C00;
-    padding: 1rem 10rem;
+    padding: 1rem 8rem;
     border: 2px solid #FF5C00;
-    margin-left: 12rem;
+    margin: 0 2rem;
     color: white;
     font-size: 18px;
 }
 
-.home-quick-leftside-button:hover, .home-snapshot-button:hover, .home-aboutUs-right-button:hover {
+.home-quick-leftside-button:hover,
+.home-snapshot-button:hover,
+.home-aboutUs-right-button:hover {
     background-color: #ec5904;
     color: white;
 }
@@ -46,7 +47,7 @@
 .home-quick-leftside-desc {
     font-size: 18px;
     width: 80%;
-    padding-bottom: 9rem;
+    padding-bottom: 6rem;
 }
 
 
@@ -55,13 +56,15 @@
 .home-resumeStep {
     display: flex;
     flex-direction: column;
-    padding: 10rem;
+    padding: 5rem 3rem;
+    ;
 }
 
 .home-resumeStep-title {
     text-align: center;
     font-size: 45px;
     font-weight: 500;
+    margin-bottom: 3rem;
 }
 
 .home-resumeStep-right {
@@ -96,6 +99,7 @@
 
 .home-snapshot {
     display: flex;
+    justify-content: space-around;
 }
 
 .home-snapshot-left-title {
@@ -104,7 +108,7 @@
 }
 
 .home-snapshot-right {
-    padding: 5rem 0;
+    padding: 3rem 0;
 }
 
 .home-snapshot-right-desc {
@@ -128,14 +132,14 @@
     border: 2px solid #FF5C00;
     color: white;
     padding: 1rem 5rem;
-    margin-top: 6rem;
+    margin-top: 2rem;
     margin-left: 4rem;
 }
 
 .home-snapshot-our-stats {
     font-size: 20px;
     font-weight: 200;
-    padding: 2rem 0;
+    padding-top: 2rem;
     margin-left: 4rem;
 }
 
@@ -168,7 +172,7 @@
 /************ CSS Fourth part ************/
 
 .home-pickTemplate {
-    margin: 10rem 5rem;
+    margin: 3rem 1rem;
     display: flex;
     justify-content: space-between;
 }
@@ -180,7 +184,7 @@
 
 .home-pickTemplate-leftside-label {
     font-size: 20px;
-    padding: 1rem 0 5rem 0;
+    padding: 1rem 0 3rem 0;
     color: #FF5C00;
 }
 
@@ -191,7 +195,7 @@
 }
 
 .home-pickTemplate-rightside {
-    padding: 11rem 0;
+    padding: 4rem 0;
 }
 
 
@@ -202,12 +206,11 @@
     font-size: 40px;
     font-weight: 500;
     text-align: center;
-    padding: 4rem;
+    padding: 2rem;
 }
 
 .home-aboutUs-detail {
     display: flex;
-    padding: 0 7rem;
 }
 
 .home-aboutUs-right-desc {
@@ -223,7 +226,7 @@
     background-color: #FF5C00;
     border: 2px solid #FF5C00;
     color: white;
-    padding: 1rem 5rem;
+    padding: 0.5rem 5rem;
     margin-top: 3rem;
 }
 
@@ -231,7 +234,7 @@
 /************ CSS Sixth part ************/
 
 .home-benefits {
-    margin: 10rem 5rem;
+    margin: 10rem 2rem 5rem;
 }
 
 .home-benefits-title {
@@ -244,7 +247,7 @@
     font-size: 25px;
     color: #FF5C00;
     text-align: center;
-    padding: 1rem 0 5rem 0;
+    padding: 1rem 0 2rem 0;
 }
 
 .home-benefits-details {
@@ -255,7 +258,7 @@
 
 .home-benefits-details-item {
     display: flex;
-    padding: 4rem;
+    padding: 2rem 0rem;
 }
 
 .home-benefits-details-item-body {
@@ -265,7 +268,7 @@
 
 .home-benefits-details-item-body-title {
     font-size: 25px;
-    padding-bottom: 3rem;
+    padding-bottom: 1rem;
     font-weight: 500;
 }
 
@@ -274,7 +277,7 @@
 }
 
 .home-testimonials {
-    margin-bottom: 10rem;
+    margin-bottom: 3rem;
 }
 
 .home-testimonials-up {
@@ -301,13 +304,13 @@
     border: 1px solid white;
     box-shadow: 1px 3px 5px grey;
     border-radius: 5px;
-    padding: 4rem;
+    padding: 2rem;
 }
 
 .home-testimonials-down {
     display: flex;
     justify-content: space-around;
-    padding: 6rem 0;
+    padding: 3rem 0;
 }
 
 .home-testimonials-card-top {
@@ -331,4 +334,17 @@
 
 .home-testimonials-card-down {
     line-height: 2;
+}
+
+/* Use a media query to add a breakpoint at 800px: */
+@media screen and (max-width: 1024px) {
+    .home-main {
+        padding: 2rem 4rem;
+    }
+
+    .home-quick-leftside-title {
+        font-weight: 450;
+        font-size: 42px;
+        padding-bottom: 2rem;
+    }
 }

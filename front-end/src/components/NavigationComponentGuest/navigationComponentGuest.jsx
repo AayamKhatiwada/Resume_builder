@@ -20,7 +20,7 @@ const NavigationComponentGuest = () => {
         <div className='nav-main-div'>
             <div className='nav-logo-text-div'>
                 <img src={Logo} alt="logo" width="100px" />
-                <h2 className='nav-main-title'>Booster Up</h2>
+                <h2 className='nav-main-title px-5'>Booster Up</h2>
             </div>
 
             <div className='nav-button-div'>

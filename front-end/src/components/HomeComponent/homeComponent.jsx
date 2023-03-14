@@ -102,7 +102,7 @@ const HomeComponent = () => {
                         <img src={ResumeTemplate1} alt="Resume template 1" width="90%" />
                     </div>
 
-                    <div className="home-snapshot-right col-sm-6">
+                    <div className="home-snapshot-right col-sm-5">
                         <div className="home-snapshot-right-desc">
                             All the flexibility & intuition you need to build a resume
                             that stands out

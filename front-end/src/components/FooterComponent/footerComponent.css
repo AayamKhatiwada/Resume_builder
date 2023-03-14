@@ -1,5 +1,5 @@
 .footer-main {
-    padding: 6rem 12rem;
+    padding: 5rem;
     background-color: #242424;
     color: white;
 }
@@ -7,7 +7,7 @@
 .footer-top {
     display: flex;
     padding-bottom: 5rem;
-    justify-content: space-between;
+    justify-content: space-around;
     padding-right: 5rem;
 }
 
@@ -20,12 +20,12 @@
 .footer-one-title {
     color: #ff7600;
     font-size: 25px;
-    padding-bottom: 1rem;
 }
 
 .footer-one-desc {
-    padding: 1rem 0 2rem;
-    line-height: 3rem;
+    padding: 1rem 0rem 2rem 0rem;
+    line-height: 1.7rem;
+    width: 80%;
 }
 
 .footer-one-icons {
