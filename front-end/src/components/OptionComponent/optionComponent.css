@@ -55,7 +55,15 @@
 }
 
 .recommendation-title {
-    font-size: 40px;
+    font-size: 30px;
     color: orange;
     padding: 2rem 3rem;
+}
+
+.cards{
+    margin-right: 3rem;
+}
+
+.cards-text{
+    margin: 1rem;
 }

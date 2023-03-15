@@ -1,14 +1,15 @@
 import './optionComponent.css';
 import DocBlank from '../assets/doc-blank.png'
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import makeslug from '../../hooks/randomGenerator';
-import { selectCurrentResume } from '../../store/resume/resume-selector';
-import { setCurrentResume } from '../../store/resume/resume-action';
+import { selectCurrentRecommendationResume, selectCurrentResume } from '../../store/resume/resume-selector';
+import { setCurrentRecommendationResume, setCurrentResume } from '../../store/resume/resume-action';
 
 const OptionComponent = () => {
     const dummyResume = useSelector(selectCurrentResume)
+    const dummyRecommendationResume = useSelector(selectCurrentRecommendationResume)
     const randomSlug = makeslug();
     const dispatch = useDispatch();
 
@@ -25,65 +26,92 @@ const OptionComponent = () => {
             )
     }, [])
 
+    useEffect(() => {
+        fetch("http://127.0.0.1:8000/api/getRecommendationResume")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    dispatch(setCurrentRecommendationResume(result));
+                },
+                (error) => {
+                    console.log(error)
+                }
+            )
+    }, [])
+
+    console.log(dummyRecommendationResume)
+    console.log(dummyResume)
+
     return (
         <>
-            <nav className="navbar navbar-default navbar-fixed-top">
-                <div className="container">
-                    <div className="navbar-header">
-                        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                            <span className="sr-only">Toggle Navigation</span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                        </button>
-                        <a className="navbar-brand" href="#">
-                            <img src="https://via.placeholder.com/150x150" alt="Logo" />
-                        </a>
-                    </div>
-
-                    <div className="collapse navbar-collapse" id="navbar-collapse">
-                        <form className="navbar-form">
-                            <div className="form-group">
-                                <input type="text" className="form-control" placeholder="Search" />
-                                <button type="submit" className="btn btn-search"><i className="glyphicon glyphicon-search"></i></button>
-                            </div>
-                        </form>
-                    </div>
+            <nav className="navbar navbar-expand-lg navbar-light bg-white container">
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <a className="navbar-brand mx-sm-4" href="/">
+                    <img src="https://via.placeholder.com/150x150" alt="Logo" />
+                </a>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <form className="form-inline my-2 my-lg-0">
+                        <div className="form-group">
+                            <input type="text" className="form-control" placeholder="Search" />
+                            <button type="submit" className="btn btn-search"><i className="fa fa-search"></i></button>
+                        </div>
+                    </form>
                 </div>
             </nav>
 
-            <section id="recommendations" style={{ marginTop: "9rem", background: "#efefef" }}>
+            <section id="recommendations" style={{ background: "#efefef" }}>
                 <div className="container">
                     <div className='recommendation-title'>Create new or choose template</div>
-                    <div className="row">
-                        <div className="col-sm-3 mb-4">
-                            <Link to={`/createResume/${randomSlug}`}>
-                                <div className="card">
-                                    <img src={DocBlank} alt="Random Image" className="card-img-top" width="180px" />
-                                    <div className="card-body">
-                                        <h5 className="card-title" style={{ color: "black" }}>New Resume</h5>
+                    <div className="d-flex flex-row flex-wrap justify-content-start">
+                        <div className="col-sm-2 mb-4 cards">
+                            <Link to={`/createResume/${randomSlug}`} className="link">
+                                <div className="">
+                                    <img src={DocBlank} alt="Random" className="card-img-top" width="180px" />
+                                    <div className="cards-text">
+                                        <h5 style={{ color: "black" }}>New Resume</h5>
                                     </div>
                                 </div>
                             </Link>
                         </div>
                         {
-                            dummyResume?.map((resume) => {
+                            dummyRecommendationResume?.map((resume) => {
                                 return (
-                                    <Link to={`/createResume/${resume.slug}`} key={resume.id}>
-                                        <div className="col-sm-3 mb-4">
-                                            <div className="card">
-                                                <img src={DocBlank} alt="Random Image" className="card-img-top" width="180px" />
-                                                <div className="card-body">
-                                                    <h5 className="card-title">{resume.title}</h5>
+                                    <div className="col-sm-2 mb-4 cards" key={resume.id}>
+                                        <Link to={`/createResume/${resume.slug}`} className="link">
+                                            <div className="">
+                                                <img src={DocBlank} alt="Random" className="card-img-top" width="180px" />
+                                                <div className="cards-text">
+                                                    <h5>{resume.title}</h5>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </Link>
+                                        </Link>
+                                    </div>
                                 );
                             })
                         }
                     </div>
                 </div>
+            </section>
+
+            <section id="UserResumes">
+                {
+                    dummyResume?.map((resume) => {
+                        return (
+                            <div className="col-sm-2 mb-4 cards card" key={resume.id}>
+                                <Link to={`/createResume/${resume.slug}`} className="link">
+                                    <div className="">
+                                        <img src={DocBlank} alt="Random" className="card-img-top" width="180px" />
+                                        <div className="cards-text">
+                                            <h5>{resume.title}</h5>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                        );
+                    })
+                }
             </section>
         </>
     );

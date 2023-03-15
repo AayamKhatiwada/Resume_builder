@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ResumeRecommendationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -28,3 +29,5 @@ Route::post('saveResume', [UserResumeController::class, 'store']);
 
 
 Route::get('getResume', [UserResumeController::class, 'show']);
+
+Route::get('getRecommendationResume', [ResumeRecommendationController::class, 'show']);
