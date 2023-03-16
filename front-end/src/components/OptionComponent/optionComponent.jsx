@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import makeslug from '../../hooks/randomGenerator';
 import { selectCurrentRecommendationResume, selectCurrentResume } from '../../store/resume/resume-selector';
 import { setCurrentRecommendationResume, setCurrentResume } from '../../store/resume/resume-action';
+import FooterComponent from '../FooterComponent/footerComponent';
 
 const OptionComponent = () => {
     const dummyResume = useSelector(selectCurrentResume)
@@ -24,9 +25,7 @@ const OptionComponent = () => {
                     console.log(error)
                 }
             )
-    }, [])
 
-    useEffect(() => {
         fetch("http://127.0.0.1:8000/api/getRecommendationResume")
             .then(res => res.json())
             .then(
@@ -38,9 +37,6 @@ const OptionComponent = () => {
                 }
             )
     }, [])
-
-    console.log(dummyRecommendationResume)
-    console.log(dummyResume)
 
     return (
         <>
@@ -96,23 +92,29 @@ const OptionComponent = () => {
             </section>
 
             <section id="UserResumes">
-                {
-                    dummyResume?.map((resume) => {
-                        return (
-                            <div className="col-sm-2 mb-4 cards card" key={resume.id}>
-                                <Link to={`/createResume/${resume.slug}`} className="link">
-                                    <div className="">
-                                        <img src={DocBlank} alt="Random" className="card-img-top" width="180px" />
-                                        <div className="cards-text">
-                                            <h5>{resume.title}</h5>
-                                        </div>
+                <div className="container" style={{marginBottom: "3rem"}}>
+                    <div className='recommendation-title'>Recent Resumes</div>
+                    <div className="d-flex flex-row flex-wrap justify-content-start">
+                        {
+                            dummyResume?.map((resume) => {
+                                return (
+                                    <div className="col-sm-2 mb-4 cards card" key={resume.id}>
+                                        <Link to={`/createResume/${resume.slug}`} className="link">
+                                            <div className="">
+                                                <img src={DocBlank} alt="Random" className="card-img-top" width="180px" />
+                                                <div className="cards-text">
+                                                    <h5>{resume.title}</h5>
+                                                </div>
+                                            </div>
+                                        </Link>
                                     </div>
-                                </Link>
-                            </div>
-                        );
-                    })
-                }
+                                );
+                            })
+                        }
+                    </div>
+                </div>
             </section>
+            <FooterComponent />
         </>
     );
 }

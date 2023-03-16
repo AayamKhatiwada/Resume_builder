@@ -6,8 +6,9 @@ import CreateResumeImage from '../assets/createresume_image.jpeg'
 import { jsPDF } from "jspdf";
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectCurrentResume } from '../../store/resume/resume-selector';
+import { selectCurrentRecommendationResume, selectCurrentResume } from '../../store/resume/resume-selector';
 import { SuccessNoty } from '../../hooks/notifications';
+import makeslug from '../../hooks/randomGenerator';
 
 const {
     Bold,
@@ -54,24 +55,33 @@ const {
 
 const CreateResumeComponent = () => {
     const content = createRef();
-    const { slugPara } = useParams();
+    const [isrecommendation, setIsRecommendation] = useState(false)
+    var { slugPara } = useParams();
     const [documentName, setDocumentName] = useState("Document");
     const allResumeData = useSelector(selectCurrentResume);
-    console.log(allResumeData)
+    const dummyRecommendationResume = useSelector(selectCurrentRecommendationResume);
 
     useEffect(() => {
         allResumeData.map((data) => {
             if (data.slug === slugPara) {
                 setDocumentName(data.title)
                 EditorUtils.setHtml(content.current.view, JSON.parse(data.ResumeData));
-                console.log(data.slug === slugPara)
-                console.log(data.title)
+                setIsRecommendation(false)
             }
         })
-    }, [allResumeData])
+
+        dummyRecommendationResume.map((data) => {
+            if (data.slug === slugPara) {
+                setDocumentName(data.title)
+                EditorUtils.setHtml(content.current.view, JSON.parse(data.ResumeData));
+                setIsRecommendation(true)
+            }
+        })
+        // console.log(EditorUtils.getHtml(content.current.view.state))
+    }, [])
 
     const saveToDatabase = async () => {
-        let resume = { user_id: "1", slug: slugPara, title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName, data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)) };
+        let resume = { user_id: "1", slug: isrecommendation? makeslug() :slugPara, title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName, data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)) };
         let result = await fetch("http://127.0.0.1:8000/api/saveResume", {
             method: "POST",
             headers: {
@@ -112,19 +122,29 @@ const CreateResumeComponent = () => {
         <div className='createResume'>
             <div className="createResume-header">
                 <div className="createResume-firstPart col-sm-1">
-                    <img src={CreateResumeImage} alt="" width="130%" />
+                    <img src={CreateResumeImage} alt="" width="100%" />
                 </div>
                 <div className="createResume-secondPart col-sm-11">
                     <div className="createResume-title">
                         <input type="text" value={documentName} onChange={(e) => setDocumentName(e.target.value)} />
                     </div>
                     <div className='createResume-options'>
-                        <div className="createResume-save" onClick={saveToDatabase}>
-                            Save
-                        </div>
-                        <div className="createResume-download" onClick={downloadresume}>
-                            Download
-                        </div>
+                        {
+                            isrecommendation ? (
+                                <div className="createResume-save" onClick={saveToDatabase}>
+                                    Save a copy
+                                </div>
+                            ) : (
+                                <>
+                                    <div className="createResume-save" onClick={saveToDatabase}>
+                                        Save
+                                    </div>
+                                    <div className="createResume-download" onClick={downloadresume}>
+                                        Download
+                                    </div>
+                                </>
+                            )
+                        }
                     </div>
                 </div>
             </div>

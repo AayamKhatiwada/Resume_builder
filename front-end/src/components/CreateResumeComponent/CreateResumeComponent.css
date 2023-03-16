@@ -1,5 +1,5 @@
 .createResume {
-    margin: 3rem;
+    margin: 1rem;
 }
 
 .createResume-header {
@@ -19,13 +19,14 @@
 .createResume-options{
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .createResume-save{
     margin: 1rem;
     background-color: #FF5C00;
     color: white;
-    padding: 1rem 3rem;
+    padding: 0.8rem 3rem;
     border-radius: 70px;
 }
 
@@ -33,7 +34,7 @@
     margin: 1rem;
     background-color: #FF5C00;
     color: white;
-    padding: 1rem 3rem;
+    padding: 0.8rem 3rem;
     border-radius: 70px;
 }
 
@@ -44,7 +45,7 @@
 }
 
 .k-editor-content{
-    margin: 0 30rem;
+    margin: 0 15rem;
     background-color: white;
 }
 
