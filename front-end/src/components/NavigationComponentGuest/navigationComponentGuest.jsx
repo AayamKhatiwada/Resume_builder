@@ -25,7 +25,7 @@ const NavigationComponentGuest = () => {
 
             <div className='nav-button-div'>
                 {
-                    IsAuthed(user) ? (
+                    !IsAuthed(user) ? (
                         <>
                             <a href="/register"><button className='nav-register-btn'>Register</button></a>
                             <a href="/sign-in"><button className='nav-login-btn'>Log In</button></a>

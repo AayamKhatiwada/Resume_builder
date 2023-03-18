@@ -4,11 +4,13 @@ import { createRef, useEffect, useState } from 'react';
 import '@progress/kendo-theme-default/dist/all.css';
 import CreateResumeImage from '../assets/createresume_image.jpeg'
 import { jsPDF } from "jspdf";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCurrentRecommendationResume, selectCurrentResume } from '../../store/resume/resume-selector';
-import { SuccessNoty } from '../../hooks/notifications';
+import { ErrorNoty, SuccessNoty } from '../../hooks/notifications';
 import makeslug from '../../hooks/randomGenerator';
+import { selectCurrentUser } from '../../store/user/user-selector';
+import IsAuthed from '../../hooks/isAuthed';
 
 const {
     Bold,
@@ -54,6 +56,9 @@ const {
 } = EditorTools;
 
 const CreateResumeComponent = () => {
+
+    const navigate = useNavigate();
+    const user = useSelector(selectCurrentUser)
     const content = createRef();
     const [isrecommendation, setIsRecommendation] = useState(false)
     var { slugPara } = useParams();
@@ -81,7 +86,7 @@ const CreateResumeComponent = () => {
     }, [])
 
     const saveToDatabase = async () => {
-        let resume = { user_id: "1", slug: isrecommendation? makeslug() :slugPara, title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName, data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)) };
+        let resume = { user_id: "1", slug: isrecommendation ? makeslug() : slugPara, title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName, data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)) };
         let result = await fetch("http://127.0.0.1:8000/api/saveResume", {
             method: "POST",
             headers: {
@@ -96,6 +101,14 @@ const CreateResumeComponent = () => {
             alert(result['error'])
         } else if (result['resume']) {
             console.log(result['resume'])
+        }
+    }
+
+    const checkLoginAndSave = () => {
+        if(!IsAuthed(user)){
+            ErrorNoty("Cannot save your Resume please login")
+        }else{
+            saveToDatabase()
         }
     }
 
@@ -117,6 +130,7 @@ const CreateResumeComponent = () => {
             windowWidth: 675
         });
     }
+    console.log(IsAuthed(user))
 
     return (
         <div className='createResume'>
@@ -131,12 +145,12 @@ const CreateResumeComponent = () => {
                     <div className='createResume-options'>
                         {
                             isrecommendation ? (
-                                <div className="createResume-save" onClick={saveToDatabase}>
+                                <div className="createResume-save" onClick={checkLoginAndSave}>
                                     Save a copy
                                 </div>
                             ) : (
                                 <>
-                                    <div className="createResume-save" onClick={saveToDatabase}>
+                                    <div className="createResume-save" onClick={checkLoginAndSave}>
                                         Save
                                     </div>
                                     <div className="createResume-download" onClick={downloadresume}>
@@ -144,6 +158,13 @@ const CreateResumeComponent = () => {
                                     </div>
                                 </>
                             )
+                        }
+
+                        {
+                            !IsAuthed(user) &&
+                            <div className="createResume-download" onClick={() => navigate('/sign-in')}>
+                                Login
+                            </div>
                         }
                     </div>
                 </div>

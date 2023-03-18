@@ -7,8 +7,11 @@ import makeslug from '../../hooks/randomGenerator';
 import { selectCurrentRecommendationResume, selectCurrentResume } from '../../store/resume/resume-selector';
 import { setCurrentRecommendationResume, setCurrentResume } from '../../store/resume/resume-action';
 import FooterComponent from '../FooterComponent/footerComponent';
+import { selectCurrentUser } from '../../store/user/user-selector';
+import IsAuthed from '../../hooks/isAuthed';
 
 const OptionComponent = () => {
+    const user = useSelector(selectCurrentUser)
     const dummyResume = useSelector(selectCurrentResume)
     const dummyRecommendationResume = useSelector(selectCurrentRecommendationResume)
     const randomSlug = makeslug();
@@ -91,29 +94,32 @@ const OptionComponent = () => {
                 </div>
             </section>
 
-            <section id="UserResumes">
-                <div className="container" style={{marginBottom: "3rem"}}>
-                    <div className='recommendation-title'>Recent Resumes</div>
-                    <div className="d-flex flex-row flex-wrap justify-content-start">
-                        {
-                            dummyResume?.map((resume) => {
-                                return (
-                                    <div className="col-sm-2 mb-4 cards card" key={resume.id}>
-                                        <Link to={`/createResume/${resume.slug}`} className="link">
-                                            <div className="">
-                                                <img src={DocBlank} alt="Random" className="card-img-top" width="180px" />
-                                                <div className="cards-text">
-                                                    <h5>{resume.title}</h5>
+            {
+                IsAuthed(user) &&
+                <section id="UserResumes">
+                    <div className="container" style={{ marginBottom: "3rem" }}>
+                        <div className='recommendation-title'>Recent Resumes</div>
+                        <div className="d-flex flex-row flex-wrap justify-content-start">
+                            {
+                                dummyResume?.map((resume) => {
+                                    return (
+                                        <div className="col-sm-2 mb-4 cards card" key={resume.id}>
+                                            <Link to={`/createResume/${resume.slug}`} className="link">
+                                                <div className="">
+                                                    <img src={DocBlank} alt="Random" className="card-img-top" width="180px" />
+                                                    <div className="cards-text">
+                                                        <h5>{resume.title}</h5>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </Link>
-                                    </div>
-                                );
-                            })
-                        }
+                                            </Link>
+                                        </div>
+                                    );
+                                })
+                            }
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            }
             <FooterComponent />
         </>
     );
