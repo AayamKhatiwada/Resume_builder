@@ -105,9 +105,9 @@ const CreateResumeComponent = () => {
     }
 
     const checkLoginAndSave = () => {
-        if(!IsAuthed(user)){
+        if (!IsAuthed(user)) {
             ErrorNoty("Cannot save your Resume please login")
-        }else{
+        } else {
             saveToDatabase()
         }
     }
@@ -130,18 +130,22 @@ const CreateResumeComponent = () => {
             windowWidth: 675
         });
     }
-    console.log(IsAuthed(user))
+    // console.log(IsAuthed(user))
 
     return (
         <div className='createResume'>
             <div className="createResume-header">
+                <div className="d-flex align-items-center justify-content-center bg-primary rounded-circle col-sm-1" style={{ width: "50px", height: "50px" }} onClick={() => navigate('/optionFor')}>
+                    <i className="fa fa-arrow-left text-white" aria-hidden="true"></i>
+                </div>
                 <div className="createResume-firstPart col-sm-1">
                     <img src={CreateResumeImage} alt="" width="100%" />
                 </div>
-                <div className="createResume-secondPart col-sm-11">
+                <div className="createResume-secondPart col-sm-10">
                     <div className="createResume-title">
                         <input type="text" value={documentName} onChange={(e) => setDocumentName(e.target.value)} />
                     </div>
+
                     <div className='createResume-options'>
                         {
                             isrecommendation ? (
@@ -162,7 +166,7 @@ const CreateResumeComponent = () => {
 
                         {
                             !IsAuthed(user) &&
-                            <div className="createResume-download" onClick={() => navigate('/sign-in')}>
+                            <div className="createResume-download" onClick={() => navigate('/sign-in', { state: { path: window.location.pathname } })}>
                                 Login
                             </div>
                         }

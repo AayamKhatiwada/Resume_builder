@@ -9,6 +9,7 @@ import { setCurrentRecommendationResume, setCurrentResume } from '../../store/re
 import FooterComponent from '../FooterComponent/footerComponent';
 import { selectCurrentUser } from '../../store/user/user-selector';
 import IsAuthed from '../../hooks/isAuthed';
+import CreateImage from '../../hooks/createImage';
 
 const OptionComponent = () => {
     const user = useSelector(selectCurrentUser)
@@ -102,13 +103,24 @@ const OptionComponent = () => {
                         <div className="d-flex flex-row flex-wrap justify-content-start">
                             {
                                 dummyResume?.map((resume) => {
+                                    const options = {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric'
+                                    };
+                                    var date = new Date(resume.updated_at);
+                                    const dateFormatted = date.toLocaleString('en-US', options)
+
+                                    const imgUrl = CreateImage(resume.title)
                                     return (
                                         <div className="col-sm-2 mb-4 cards card" key={resume.id}>
                                             <Link to={`/createResume/${resume.slug}`} className="link">
                                                 <div className="">
-                                                    <img src={DocBlank} alt="Random" className="card-img-top" width="180px" />
+                                                    <img src={imgUrl} alt="Random" className="card-img-top" width="180px" />
+                                                    <hr />
                                                     <div className="cards-text">
                                                         <h5>{resume.title}</h5>
+                                                        <p style={{fontSize: "12px"}}>Updated at: {dateFormatted}</p>
                                                     </div>
                                                 </div>
                                             </Link>

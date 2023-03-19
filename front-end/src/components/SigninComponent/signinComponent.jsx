@@ -1,6 +1,5 @@
 import './signinComponent.css';
 import Image from '../assets/login_image.svg';
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser, setUserError } from '../../store/user/user-action';
@@ -8,8 +7,6 @@ import { ErrorNoty, SuccessNoty } from '../../hooks/notifications';
 
 const SigninComponent = () => {
 
-    const navigate = useNavigate();
-    // const [error, seterror] = useState();
     const dispatch = useDispatch();
 
     const [email, setEmail] = useState('');
@@ -32,10 +29,8 @@ const SigninComponent = () => {
         } else if (result['user']) {
             dispatch(setCurrentUser(result['user']));
             SuccessNoty("Login Successful")
-            navigate('/');
         }
     }
-
 
     return (
         <div className="container">
