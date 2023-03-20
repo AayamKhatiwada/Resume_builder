@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import IsAuthed from '../../hooks/isAuthed';
 import { SuccessNoty } from '../../hooks/notifications';
 import { removeUser } from '../../store/user/user-action';
@@ -9,6 +10,7 @@ import './navigationComponentGuest.css';
 const NavigationComponentGuest = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const user = useSelector(selectCurrentUser);
 
     const logout = () => {
@@ -28,7 +30,7 @@ const NavigationComponentGuest = () => {
                     !IsAuthed(user) ? (
                         <>
                             <a href="/register"><button className='nav-register-btn'>Register</button></a>
-                            <a href="/sign-in"><button className='nav-login-btn'>Log In</button></a>
+                            <a><button className='nav-login-btn' onClick={() => navigate('/sign-in', { state: { path: window.location.pathname } })}>Log In</button></a>
                         </>
                     ) : (
                         <button className='nav-login-btn' onClick={logout}>Log Out</button>
