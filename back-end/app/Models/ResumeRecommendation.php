@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ResumeRecommendation extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'slug',
+        'title',
+        'image',
+        'ResumeData',
+    ];
 }

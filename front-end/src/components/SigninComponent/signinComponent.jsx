@@ -4,10 +4,12 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser, setUserError } from '../../store/user/user-action';
 import { ErrorNoty, SuccessNoty } from '../../hooks/notifications';
+import { useNavigate } from 'react-router-dom';
 
 const SigninComponent = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -59,7 +61,7 @@ const SigninComponent = () => {
                     </div>
                     <button type="button" className='btn btn-success button-style' onClick={() => login()}>Sign in</button>
                     <button type="button" className='btn btn-light button-style'>Sign in with Google</button>
-                    <p className='text-center'>Dont't have an account? &nbsp;<a href="/register">Sign Up</a></p>
+                    <p className='text-center'>Dont't have an account? &nbsp;<p onClick={() => navigate('/register', { state: { path: window.location.pathname } })}>Sign Up</p></p>
                 </div>
                 <div className="col-sm-6">
                     <img src={Image} alt="Voter_box" width="90%" className='image-style' />

@@ -54,9 +54,10 @@ class UserResumeController extends Controller
      * @param  \App\Models\UserResume  $userResume
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        return UserResume::all();
+        // return UserResume::where("user_id", $id);
+        return UserResume::all()->where("user_id", $id);
     }
 
     /**

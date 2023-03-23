@@ -10,6 +10,7 @@ import FooterComponent from '../FooterComponent/footerComponent';
 import { selectCurrentUser } from '../../store/user/user-selector';
 import IsAuthed from '../../hooks/isAuthed';
 import CreateImage from '../../hooks/createImage';
+import CreateTemplate from '../../hooks/createTemplate';
 
 const OptionComponent = () => {
     const user = useSelector(selectCurrentUser)
@@ -19,7 +20,7 @@ const OptionComponent = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/getResume")
+        fetch(`http://127.0.0.1:8000/api/getResume/${user.id}`)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -30,7 +31,7 @@ const OptionComponent = () => {
                 }
             )
 
-        fetch("http://127.0.0.1:8000/api/getRecommendationResume")
+        fetch('http://127.0.0.1:8000/api/getRecommendationResume')
             .then(res => res.json())
             .then(
                 (result) => {
@@ -41,6 +42,8 @@ const OptionComponent = () => {
                 }
             )
     }, [])
+
+    console.log(dummyResume)
 
     return (
         <>
@@ -110,13 +113,16 @@ const OptionComponent = () => {
                                     };
                                     var date = new Date(resume.updated_at);
                                     const dateFormatted = date.toLocaleString('en-US', options)
+                                    // console.log(JSON.parse(resume.ResumeData))
+                                    // CreateTemplate(JSON.parse(resume.ResumeData), resume.id)
 
-                                    const imgUrl = CreateImage(resume.title)
+                                    const ImgUrl = CreateImage(resume.title)
+
                                     return (
                                         <div className="col-sm-2 mb-4 cards card" key={resume.id}>
                                             <Link to={`/createResume/${resume.slug}`} className="link">
                                                 <div className="">
-                                                    <img src={imgUrl} alt="Random" className="card-img-top" width="180px" />
+                                                    <img src={ImgUrl} alt="Random" className="card-img-top" width="180px" height="200px" id={`UserResumeImage${resume.id}`} style={{objectFit: "scale-down"}}/>
                                                     <hr />
                                                     <div className="cards-text">
                                                         <h5>{resume.title}</h5>

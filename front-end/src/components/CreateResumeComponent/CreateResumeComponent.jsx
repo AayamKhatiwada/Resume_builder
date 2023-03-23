@@ -86,7 +86,7 @@ const CreateResumeComponent = () => {
     }, [])
 
     const saveToDatabase = async () => {
-        let resume = { user_id: "1", slug: isrecommendation ? makeslug() : slugPara, title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName, data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)) };
+        let resume = { user_id: user.id, slug: isrecommendation ? makeslug() : slugPara, title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName, data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)) };
         let result = await fetch("http://127.0.0.1:8000/api/saveResume", {
             method: "POST",
             headers: {
