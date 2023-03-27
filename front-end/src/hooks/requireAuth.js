@@ -6,6 +6,8 @@ function RequireAuth({ children }) {
     const authed = useSelector(selectCurrentUser);
     const location = useLocation();
 
+    console.log(location.pathname)
+
     return !(Object.keys(authed).length === 0) ? (
         children
     ) : (

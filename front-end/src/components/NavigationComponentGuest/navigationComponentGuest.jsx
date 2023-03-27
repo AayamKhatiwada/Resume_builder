@@ -29,7 +29,7 @@ const NavigationComponentGuest = () => {
                 {
                     !IsAuthed(user) ? (
                         <>
-                            <a href="/register"><button className='nav-register-btn'>Register</button></a>
+                            <a><button className='nav-register-btn' onClick={() => navigate('/register', { state: { path: window.location.pathname } })}>Register</button></a>
                             <a><button className='nav-login-btn' onClick={() => navigate('/sign-in', { state: { path: window.location.pathname } })}>Log In</button></a>
                         </>
                     ) : (
