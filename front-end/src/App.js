@@ -7,6 +7,8 @@ import CreateResumePage from './routes/createResumePage';
 import OptionPage from './routes/optionPage';
 import WithoutAuthOnly from './hooks/withoutAuthOnly';
 import { ToastContainer } from 'react-toastify';
+import AdminLogin from './routes/AdminLogin';
+import AdminDashboard from './routes/AdminDashboard';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           } />
           <Route path="/createResume/:slugPara" element={<CreateResumePage />} />
           <Route path="/optionFor" element={<OptionPage />} />
+          <Route path="adminLogin" element={<AdminLogin />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer />
