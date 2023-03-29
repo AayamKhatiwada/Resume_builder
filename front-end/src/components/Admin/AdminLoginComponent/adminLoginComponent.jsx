@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ErrorNoty } from '../../hooks/notifications';
+import { ErrorNoty } from '../../../hooks/notifications';
 import './adminLoginComponent.css'
 
 const AdminLoginComponent = () => {

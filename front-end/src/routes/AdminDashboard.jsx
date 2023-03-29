@@ -1,4 +1,4 @@
-import AdminDashboardComponent from "../components/AdminDashboardComponent/adminDashboardComponent";
+import AdminDashboardComponent from "../components/Admin/AdminDashboardComponent/adminDashboardComponent";
 
 const AdminDashboard = () => {
     return (

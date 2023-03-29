@@ -1,4 +1,4 @@
-import AdminLoginComponent from "../components/AdminLoginComponent/adminLoginComponent";
+import AdminLoginComponent from "../components/Admin/AdminLoginComponent/adminLoginComponent";
 
 const AdminLogin = () => {
     return (

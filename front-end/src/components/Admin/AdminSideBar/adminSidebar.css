@@ -1,0 +1,11 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    /* To make sure the sidebar is on top of everything else */
+    padding: 48px 16px;
+    background-color: #f8f9fa;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
