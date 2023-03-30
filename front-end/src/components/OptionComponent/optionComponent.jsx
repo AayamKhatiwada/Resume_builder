@@ -5,12 +5,12 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import makeslug from '../../hooks/randomGenerator';
 import { selectCurrentRecommendationResume, selectCurrentResume } from '../../store/resume/resume-selector';
-import { setCurrentRecommendationResume, setCurrentResume } from '../../store/resume/resume-action';
+import { setCurrentResume } from '../../store/resume/resume-action';
 import FooterComponent from '../FooterComponent/footerComponent';
 import { selectCurrentUser } from '../../store/user/user-selector';
 import IsAuthed from '../../hooks/isAuthed';
 import CreateImage from '../../hooks/createImage';
-import CreateTemplate from '../../hooks/createTemplate';
+// import CreateTemplate from '../../hooks/createTemplate';
 
 const OptionComponent = () => {
     const user = useSelector(selectCurrentUser)
@@ -25,17 +25,6 @@ const OptionComponent = () => {
             .then(
                 (result) => {
                     dispatch(setCurrentResume(result));
-                },
-                (error) => {
-                    console.log(error)
-                }
-            )
-
-        fetch('http://127.0.0.1:8000/api/getRecommendationResume')
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    dispatch(setCurrentRecommendationResume(result));
                 },
                 (error) => {
                     console.log(error)
@@ -122,11 +111,11 @@ const OptionComponent = () => {
                                         <div className="col-sm-2 mb-4 cards card" key={resume.id}>
                                             <Link to={`/createResume/${resume.slug}`} className="link">
                                                 <div className="">
-                                                    <img src={ImgUrl} alt="Random" className="card-img-top" width="180px" height="200px" id={`UserResumeImage${resume.id}`} style={{objectFit: "scale-down"}}/>
+                                                    <img src={ImgUrl} alt="Random" className="card-img-top" width="180px" height="200px" id={`UserResumeImage${resume.id}`} style={{ objectFit: "scale-down" }} />
                                                     <hr />
                                                     <div className="cards-text">
                                                         <h5>{resume.title}</h5>
-                                                        <p style={{fontSize: "12px"}}>Updated at: {dateFormatted}</p>
+                                                        <p style={{ fontSize: "12px" }}>Updated at: {dateFormatted}</p>
                                                     </div>
                                                 </div>
                                             </Link>

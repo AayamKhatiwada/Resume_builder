@@ -9,8 +9,27 @@ import WithoutAuthOnly from './hooks/withoutAuthOnly';
 import { ToastContainer } from 'react-toastify';
 import AdminLogin from './routes/AdminLogin';
 import AdminDashboard from './routes/AdminDashboard';
+import { setCurrentRecommendationResume } from './store/resume/resume-action';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/api/getRecommendationResume')
+      .then(res => res.json())
+      .then(
+        (result) => {
+          dispatch(setCurrentRecommendationResume(result));
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+  }, [])
+
   return (
     <div className="App">
       <BrowserRouter>
