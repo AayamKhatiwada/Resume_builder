@@ -23,8 +23,7 @@
     transition: all 0.2s ease-in-out;
 }
 
-.floating-button:hover,
-.admin-button:hover
+.floating-button:hover
 {
     width: 70px;
     height: 70px;
@@ -89,8 +88,4 @@
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
     z-index: 9999;
     transition: all 0.2s ease-in-out;
-}
-
-.admin-profile:hover{
-    font-size: large;
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import AdminDashboardItemComponent from '../AdminDashboardItemComponent/adminDashBoardItemComponent';
 import AdminRecommendation from '../AdminRecommendation/adminRecommendation';
+import AdminRecommendationRegister from '../AdminRecommendationRegister/adminRecommendationRegister';
 import AdminSideBar from '../AdminSideBar/adminSidebar';
 import './adminDashboardComponent.css'
 
@@ -16,7 +17,7 @@ const AdminDashboardComponent = () => {
                 <div className="row">
                     <AdminSideBar setOptions={setOptions} options={options} />
                     <div className="col-md-10 main-content">
-                        <div className='px-5 d-flex justify-content-between'>
+                        <div className='px-5 d-flex justify-content-between' style={{padding: "1rem 0 2rem 0"}}>
                             <div className="h1 text-secondary">{options}</div>
                             <div className='d-flex align-items-center admin-profile' onClick={() => setDisplayAdminOption(!displayAdminOption)}>
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBQn5Cw7Sx51hfAqjTm2iWshuqBA6UVnWL0g&usqp=CAU" className="admin-button link" id="floating-button" />
@@ -27,7 +28,6 @@ const AdminDashboardComponent = () => {
                             displayAdminOption && (
                                 <div className="floating-menu-admin" id="floating-menu-admin">
                                     <ul>
-                                        <li>View profile</li>
                                         <li>Log Out</li>
                                     </ul>
                                 </div>
@@ -40,7 +40,7 @@ const AdminDashboardComponent = () => {
 
                                 <div className="floating-menu" id="floating-menu">
                                     <ul>
-                                        <li>Add recommendation template</li>
+                                        <li onClick={() => setOptions("Recommendation Resume Register")}>Add recommendation template</li>
                                         <li>Add new resume</li>
                                     </ul>
                                 </div>
@@ -52,6 +52,9 @@ const AdminDashboardComponent = () => {
                         }
                         {
                             options === "Template" && <AdminRecommendation />
+                        }
+                        {
+                            options === "Recommendation Resume Register" && <AdminRecommendationRegister />
                         }
 
                     </div>

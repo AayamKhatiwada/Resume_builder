@@ -73,7 +73,7 @@ const OptionComponent = () => {
                                     <div className="col-sm-2 mb-4 cards" key={resume.id}>
                                         <Link to={`/createResume/${resume.slug}`} className="link">
                                             <div className="">
-                                                <img src={DocBlank} alt="Random" className="card-img-top" width="180px" />
+                                                <img src={`http://127.0.0.1:8000/uploads/recommendationImage/${resume.image}`} alt="Random" className="card-img-top" width="180px" />
                                                 <div className="cards-text">
                                                     <h5>{resume.title}</h5>
                                                 </div>

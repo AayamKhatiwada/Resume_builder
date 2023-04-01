@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ErrorNoty } from '../../../hooks/notifications';
+import { setCurrentAdmin } from '../../../store/admin/admin-action';
 import './adminLoginComponent.css'
 
 const AdminLoginComponent = () => {
@@ -8,9 +10,11 @@ const AdminLoginComponent = () => {
     const navigate = useNavigate()
     const [admin, setAdmin] = useState("")
     const [password, setPassword] = useState("")
+    const dispatch = useDispatch()
 
     const onSubmit = () => {
         if (admin === "admin" && password === "admin") {
+            dispatch(setCurrentAdmin({admin: "admin", password: "admin"}))
             navigate('/dashboard')
         } else if (admin === "admin") {
             ErrorNoty("Wrong Password")
@@ -25,9 +29,9 @@ const AdminLoginComponent = () => {
         <>
             <div className="admin-login">
                 <h1>Admin Login</h1>
-                <label for="username">Username</label>
+                <label htmlFor="username">Username</label>
                 <input type="text" name="username" id="username" value={admin} onChange={(e) => setAdmin(e.target.value)} />
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
                 <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <input type="submit" value="Log in" onClick={() => onSubmit()} />
             </div>

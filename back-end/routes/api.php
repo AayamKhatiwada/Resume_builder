@@ -31,3 +31,5 @@ Route::post('saveResume', [UserResumeController::class, 'store']);
 Route::get('getResume/{id}', [UserResumeController::class, 'show']);
 
 Route::get('getRecommendationResume', [ResumeRecommendationController::class, 'show']);
+
+Route::post('registerRecommendationResume', [ResumeRecommendationController::class, 'registerRecommendationResume']);
