@@ -61,7 +61,7 @@ const SigninComponent = () => {
                     </div>
                     <button type="button" className='btn btn-success button-style' onClick={() => login()}>Sign in</button>
                     <button type="button" className='btn btn-light button-style'>Sign in with Google</button>
-                    <p className='text-center'>Dont't have an account? &nbsp;<p onClick={() => navigate('/register', { state: { path: window.location.pathname } })}>Sign Up</p></p>
+                    <div className='text-center'>Dont't have an account? &nbsp;<p onClick={() => navigate('/register', { state: { path: window.location.pathname } })}>Sign Up</p></div>
                 </div>
                 <div className="col-sm-6">
                     <img src={Image} alt="Voter_box" width="90%" className='image-style' />

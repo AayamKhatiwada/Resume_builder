@@ -1,31 +1,47 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { SuccessNoty } from "../../../hooks/notifications";
+import { setCurrentRecommendationResume } from "../../../store/resume/resume-action";
 import { selectCurrentRecommendationResume } from "../../../store/resume/resume-selector";
-import DocBlank from '../../assets/doc-blank.png'
+import './adminRecommendation.css'
 
 const AdminRecommendation = () => {
 
     const dummyRecommendationResume = useSelector(selectCurrentRecommendationResume)
 
+    const deleteResume = (resume) => {
+        fetch(`http://127.0.0.1:8000/api/deleteRecommendationResume/${resume.id}`)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    SuccessNoty(result.data);
+                },
+                (error) => {
+                    console.log(error)
+                }
+            )
+    }
+
     return (
-        <>
+        <div className="admin-recommendation-main">
             {
                 dummyRecommendationResume?.map((resume) => {
                     return (
-                        <div className="col-sm-2 mb-4 cards" key={resume.id}>
+                        <div className="col-sm-2 mb-4 cards text-center" key={resume.id}>
                             <Link to={`/createResume/${resume.slug}`} className="link">
                                 <div className="">
-                                    <img src={DocBlank} alt="Random" className="card-img-top" width="180px" />
-                                    <div className="cards-text">
+                                    <img src={`http://127.0.0.1:8000/uploads/recommendationImage/${resume.image}`} alt="Random" width="200px" height="200px" style={{ objectFit: "cover" }} />
+                                    <div className="cards-text my-3">
                                         <h5>{resume.title}</h5>
                                     </div>
                                 </div>
                             </Link>
+                            <button className="btn btn-danger my-3" onClick={() => deleteResume(resume)}>Delete</button>
                         </div>
                     );
                 })
             }
-        </>
+        </div>
     )
 }
 

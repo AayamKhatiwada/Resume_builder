@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_resumes', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->text('slug');
-            $table->string('title');
-            $table->boolean('include_in_community')->default(0);
-            $table->text('ResumeData');
-            $table->rememberToken();
+            $table->string('name');
+            $table->string('password');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_resumes');
+        Schema::dropIfExists('admins');
     }
 };

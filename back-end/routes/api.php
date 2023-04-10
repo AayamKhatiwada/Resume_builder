@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ResumeRecommendationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login', [UserController::class, 'login']);
 
+Route::post('adminCheck', [AdminController::class, 'adminLogin']);
+
 Route::post('register', [UserController::class, 'register']);
 
 Route::post('saveResume', [UserResumeController::class, 'store']);
@@ -32,4 +35,8 @@ Route::get('getResume/{id}', [UserResumeController::class, 'show']);
 
 Route::get('getRecommendationResume', [ResumeRecommendationController::class, 'show']);
 
+Route::get('getCommunityResume', [UserResumeController::class, 'communityResumes']);
+
 Route::post('registerRecommendationResume', [ResumeRecommendationController::class, 'registerRecommendationResume']);
+
+Route::get('deleteRecommendationResume/{id}', [ResumeRecommendationController::class, 'deleteRecommendationResume']);

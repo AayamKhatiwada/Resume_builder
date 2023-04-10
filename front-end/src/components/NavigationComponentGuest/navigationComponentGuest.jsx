@@ -33,8 +33,10 @@ const NavigationComponentGuest = () => {
                             <a><button className='nav-login-btn' onClick={() => navigate('/sign-in', { state: { path: window.location.pathname } })}>Log In</button></a>
                         </>
                     ) : (
-                        <button className='nav-login-btn' onClick={logout}>Log Out</button>
-
+                        <>
+                            <button className='nav-login-btn' onClick={() => navigate('/community')}>Community</button>
+                            <button className='nav-login-btn' onClick={logout}>Log Out</button>
+                        </>
                     )
                 }
 

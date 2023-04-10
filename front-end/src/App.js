@@ -12,6 +12,7 @@ import AdminDashboard from './routes/AdminDashboard';
 import { setCurrentRecommendationResume } from './store/resume/resume-action';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import Community from './routes/Community';
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
           <Route path="/optionFor" element={<OptionPage />} />
           <Route path="adminLogin" element={<AdminLogin />} />
           <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="community" element={<Community />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer />

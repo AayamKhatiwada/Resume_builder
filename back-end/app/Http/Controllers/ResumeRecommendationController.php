@@ -33,4 +33,12 @@ class ResumeRecommendationController extends Controller
 
         return ["resume" => $resume];
     }
+
+    public function deleteRecommendationResume($id)
+    {
+        $resume = ResumeRecommendation::findOrFail($id); // Find the resume by ID
+        $resume->delete();
+
+        return ["data" => "Resume Deleted successful"];
+    }
 }
