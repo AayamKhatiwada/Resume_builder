@@ -24,6 +24,7 @@ const OptionComponent = () => {
             .then(res => res.json())
             .then(
                 (result) => {
+                    console.log(result)
                     dispatch(setCurrentResume(result));
                 },
                 (error) => {
@@ -31,8 +32,6 @@ const OptionComponent = () => {
                 }
             )
     }, [])
-
-    console.log(dummyResume)
 
     return (
         <>

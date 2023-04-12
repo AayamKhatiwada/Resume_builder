@@ -13,5 +13,6 @@ class UserResume extends Model
         'title',
         'slug',
         'ResumeData',
+        'include_in_community',
     ];
 }

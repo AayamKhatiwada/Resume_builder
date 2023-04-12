@@ -1,12 +1,17 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './communityComponent.css'
-import DocBlank from '../assets/doc-blank.png'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import CreateImage from '../../hooks/createImage';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentCommunityResume } from '../../store/resume/resume-action';
+import { selectCurrentCommunityResume } from '../../store/resume/resume-selector';
 
 const CommunityComponent = () => {
 
-    const [communityResume, setCommunityResume] = useState([])
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const communityResume = useSelector(selectCurrentCommunityResume);
+    console.log(communityResume)
 
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/api/getCommunityResume`)
@@ -14,8 +19,7 @@ const CommunityComponent = () => {
             .then(
                 (result) => {
                     console.log(result)
-                    setCommunityResume(result)
-                    // dispatch(setCurrentResume(result));
+                    dispatch(setCurrentCommunityResume(result));
                 },
                 (error) => {
                     console.log(error)
@@ -33,35 +37,37 @@ const CommunityComponent = () => {
                 <div className="row">
                     <div className="col-lg-8">
                         <h2>Resumes</h2>
-                        {
-                            communityResume.length !== 0 && communityResume.map((resume) => {
-                                const options = {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric'
-                                };
-                                var date = new Date(resume.updated_at);
-                                const dateFormatted = date.toLocaleString('en-US', options)
-                                // console.log(JSON.parse(resume.ResumeData))
-                                // CreateTemplate(JSON.parse(resume.ResumeData), resume.id)
-                                const ImgUrl = CreateImage(resume.title)
+                        <div className='d-flex flex-wrap'>
+                            {
+                                communityResume.length !== 0 && communityResume?.map((resume) => {
+                                    const options = {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric'
+                                    };
+                                    var date = new Date(resume.updated_at);
+                                    const dateFormatted = date.toLocaleString('en-US', options)
+                                    // console.log(JSON.parse(resume.ResumeData))
+                                    // CreateTemplate(JSON.parse(resume.ResumeData), resume.id)
+                                    const ImgUrl = CreateImage(resume.title)
 
-                                return (
-                                    <div className="col-sm-3 my-3 card" key={resume.id}>
-                                        <Link to={`/createResume/${resume.slug}`} className="link">
-                                            <div className="">
-                                                <img src={ImgUrl} alt="Random" className="card-img-top" width="180px" height="210px" id={`UserResumeImageresume.id}`} style={{ objectFit: "scale-down" }} />
-                                                <hr />
-                                                <div className="cards-text">
-                                                    <h5>{resume.title}</h5>
-                                                    <p style={{ fontSize: "12px" }}>Updated at: {dateFormatted}</p>
+                                    return (
+                                        <div className="col-sm-3 m-3 card" key={resume.id}>
+                                            <div onClick={() => navigate(`/createResume/${resume.slug}`, { state: "Community" })} className="link">
+                                                <div className="">
+                                                    <img src={ImgUrl} alt="Random" className="card-img-top" width="180px" height="210px" id={`UserResumeImageresume.id}`} style={{ objectFit: "scale-down" }} />
+                                                    <hr />
+                                                    <div className="cards-text">
+                                                        <h5>{resume.title}</h5>
+                                                        <p style={{ fontSize: "12px" }}>Updated at: {dateFormatted}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </Link>
-                                    </div>
-                                )
-                            })
-                        }
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
                     <div className="col-lg-4">
                         <h2>Filter By</h2>

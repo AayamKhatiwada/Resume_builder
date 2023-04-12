@@ -4,13 +4,14 @@ import { createRef, useEffect, useState } from 'react';
 import '@progress/kendo-theme-default/dist/all.css';
 import CreateResumeImage from '../assets/createresume_image.jpeg'
 import { jsPDF } from "jspdf";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectCurrentRecommendationResume, selectCurrentResume } from '../../store/resume/resume-selector';
+import { selectCurrentCommunityResume, selectCurrentRecommendationResume, selectCurrentResume } from '../../store/resume/resume-selector';
 import { ErrorNoty, SuccessNoty } from '../../hooks/notifications';
 import makeslug from '../../hooks/randomGenerator';
 import { selectCurrentUser } from '../../store/user/user-selector';
 import IsAuthed from '../../hooks/isAuthed';
+import Switch from '@mui/material/Switch';
 
 const {
     Bold,
@@ -65,6 +66,22 @@ const CreateResumeComponent = () => {
     const [documentName, setDocumentName] = useState("Document");
     const allResumeData = useSelector(selectCurrentResume);
     const dummyRecommendationResume = useSelector(selectCurrentRecommendationResume);
+    const communityResume = useSelector(selectCurrentCommunityResume);
+    const [checked, setChecked] = useState(false);
+    const [checkedData, setCheckedData] = useState(checked ? "Make it public" : "Keep it private")
+
+    const location = useLocation();
+    const data = location.state;
+    console.log(data)
+
+    const handleChangeChecked = (event) => {
+        setChecked(event.target.checked);
+        if (event.target.checked) {
+            setCheckedData("Make it public")
+        } else {
+            setCheckedData("Keep it private")
+        }
+    };
 
     useEffect(() => {
         allResumeData.map((data) => {
@@ -82,11 +99,31 @@ const CreateResumeComponent = () => {
                 setIsRecommendation(true)
             }
         })
+
+        communityResume.map((data) => {
+            if (data.slug === slugPara) {
+                setDocumentName(data.title)
+                EditorUtils.setHtml(content.current.view, JSON.parse(data.ResumeData));
+                setChecked(data.include_in_community? true: false)
+                if (checked) {
+                    setCheckedData("Make it public")
+                } else {
+                    setCheckedData("Keep it private")
+                }
+            }
+        })
         // console.log(EditorUtils.getHtml(content.current.view.state))
     }, [])
 
+    console.log(checkedData)
     const saveToDatabase = async () => {
-        let resume = { user_id: user.id, slug: isrecommendation ? makeslug() : slugPara, title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName, data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)) };
+        let resume = {
+            user_id: user.id,
+            slug: isrecommendation || data ==="Community" ? makeslug() : slugPara,
+            title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName,
+            data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)),
+            include_in_community: data==="Community" ? false: checked
+        };
         let result = await fetch("http://127.0.0.1:8000/api/saveResume", {
             method: "POST",
             headers: {
@@ -148,12 +185,19 @@ const CreateResumeComponent = () => {
 
                     <div className='createResume-options'>
                         {
-                            isrecommendation ? (
+                            isrecommendation || data === "Community"? (
                                 <div className="createResume-save" onClick={checkLoginAndSave}>
                                     Save a copy
                                 </div>
                             ) : (
                                 <>
+                                    {checkedData}
+                                    <Switch
+                                        checked={checked}
+                                        onChange={handleChangeChecked}
+                                        inputProps={{ 'aria-label': 'controlled' }}
+                                        color="warning"
+                                    />
                                     <div className="createResume-save" onClick={checkLoginAndSave}>
                                         Save
                                     </div>

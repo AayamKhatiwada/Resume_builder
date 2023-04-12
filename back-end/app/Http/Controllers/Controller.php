@@ -15,6 +15,6 @@ class Controller extends BaseController
     public function communityResumes()
     {
         // return UserResume::where("user_id", $id);
-        return UserResume::all()->where("include_in_community", 0);
+        return UserResume::where("include_in_community", 1)->get()->toArray();
     }
 }

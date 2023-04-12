@@ -35,13 +35,15 @@ class UserResumeController extends Controller
      */
     public function store(Request $request)
     {
+        // return ["include_in_community" => $request->input('include_in_community')? 1:0];
         $resume = UserResume::updateOrCreate(
             ['slug' => $request->input('slug')], // find resume by slug
             [
                 'user_id' => $request->input('user_id'),
                 'title' => $request->input('title'),
                 'slug' => $request->input('slug'),
-                'ResumeData' => $request->input('data')
+                'ResumeData' => $request->input('data'),
+                'include_in_community' => $request->input('include_in_community')? 1:0
             ] // update or create a new resume
         );
 
@@ -57,7 +59,7 @@ class UserResumeController extends Controller
     public function show($id)
     {
         // return UserResume::where("user_id", $id);
-        return UserResume::all()->where("user_id", $id);
+        return UserResume::where("user_id", $id)->get()->toArray();
     }
 
     /**

@@ -5,3 +5,7 @@ export const selectCurrentResume = (state) => {
 export const selectCurrentRecommendationResume = (state) => {
     return state.resume.currentRecommendationResume;
 };
+
+export const selectCurrentCommunityResume = (state) => {
+    return state.resume.currentCommunityResume;
+};
