@@ -7,6 +7,7 @@ import { jsPDF } from "jspdf";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCurrentCommunityResume, selectCurrentRecommendationResume, selectCurrentResume } from '../../store/resume/resume-selector';
+import { selectCurrentAdmin } from '../../store/admin/admin-selector';
 import { ErrorNoty, SuccessNoty } from '../../hooks/notifications';
 import makeslug from '../../hooks/randomGenerator';
 import { selectCurrentUser } from '../../store/user/user-selector';
@@ -60,6 +61,7 @@ const CreateResumeComponent = () => {
 
     const navigate = useNavigate();
     const user = useSelector(selectCurrentUser)
+    const admin = useSelector(selectCurrentAdmin)
     const content = createRef();
     const [isrecommendation, setIsRecommendation] = useState(false)
     var { slugPara } = useParams();
@@ -72,7 +74,7 @@ const CreateResumeComponent = () => {
 
     const location = useLocation();
     const data = location.state;
-    console.log(data)
+    // console.log(data)
 
     const handleChangeChecked = (event) => {
         setChecked(event.target.checked);
@@ -104,7 +106,7 @@ const CreateResumeComponent = () => {
             if (data.slug === slugPara) {
                 setDocumentName(data.title)
                 EditorUtils.setHtml(content.current.view, JSON.parse(data.ResumeData));
-                setChecked(data.include_in_community? true: false)
+                setChecked(data.include_in_community ? true : false)
                 if (checked) {
                     setCheckedData("Make it public")
                 } else {
@@ -115,14 +117,13 @@ const CreateResumeComponent = () => {
         // console.log(EditorUtils.getHtml(content.current.view.state))
     }, [])
 
-    console.log(checkedData)
     const saveToDatabase = async () => {
         let resume = {
             user_id: user.id,
-            slug: isrecommendation || data ==="Community" ? makeslug() : slugPara,
+            slug: isrecommendation || data === "Community" ? makeslug() : slugPara,
             title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName,
             data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)),
-            include_in_community: data==="Community" ? false: checked
+            include_in_community: data === "Community" ? false : checked
         };
         let result = await fetch("http://127.0.0.1:8000/api/saveResume", {
             method: "POST",
@@ -141,11 +142,37 @@ const CreateResumeComponent = () => {
         }
     }
 
+    const saveRecommendation = async () => {
+        let resume = {
+            slug: slugPara,
+            title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName,
+            data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)),
+        };
+        let result = await fetch("http://127.0.0.1:8000/api/updateRecommendationResume", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            body: JSON.stringify(resume)
+        });
+        result = await result.json();
+        console.log(result)
+        SuccessNoty("Data has been stored")
+        if (result['error']) {
+            alert(result['error'])
+        } else if (result['resume']) {
+            console.log(result['resume'])
+        }
+    }
+
     const checkLoginAndSave = () => {
-        if (!IsAuthed(user)) {
+        if (!IsAuthed(user) && admin.admin === false) {
             ErrorNoty("Cannot save your Resume please login")
-        } else {
+        } else if (IsAuthed(user)) {
             saveToDatabase()
+        } else if (admin.admin === "true") {
+            saveRecommendation()
         }
     }
 
@@ -172,9 +199,9 @@ const CreateResumeComponent = () => {
     return (
         <div className='createResume'>
             <div className="createResume-header">
-                <div className="d-flex align-items-center justify-content-center bg-primary rounded-circle col-sm-1" style={{ width: "50px", height: "50px" }} onClick={() => navigate('/optionFor')}>
+                {/* <div className="d-flex align-items-center justify-content-center bg-primary rounded-circle col-sm-1" style={{ width: "50px", height: "50px" }} onClick={() => navigate('/optionFor')}>
                     <i className="fa fa-arrow-left text-white" aria-hidden="true"></i>
-                </div>
+                </div> */}
                 <div className="createResume-firstPart col-sm-1">
                     <img src={CreateResumeImage} alt="" width="100%" />
                 </div>
@@ -185,31 +212,42 @@ const CreateResumeComponent = () => {
 
                     <div className='createResume-options'>
                         {
-                            isrecommendation || data === "Community"? (
+                            (isrecommendation || data === "Community") && data !== "Admin" ? (
                                 <div className="createResume-save" onClick={checkLoginAndSave}>
                                     Save a copy
                                 </div>
                             ) : (
                                 <>
-                                    {checkedData}
-                                    <Switch
-                                        checked={checked}
-                                        onChange={handleChangeChecked}
-                                        inputProps={{ 'aria-label': 'controlled' }}
-                                        color="warning"
-                                    />
+                                    {
+                                        data !== "Admin" && (
+                                            <>
+                                                {checkedData}
+
+                                                < Switch
+                                                    checked={checked}
+                                                    onChange={handleChangeChecked}
+                                                    inputProps={{ 'aria-label': 'controlled' }}
+                                                    color="warning"
+                                                />
+                                            </>
+                                        )
+                                    }
                                     <div className="createResume-save" onClick={checkLoginAndSave}>
                                         Save
                                     </div>
-                                    <div className="createResume-download" onClick={downloadresume}>
-                                        Download
-                                    </div>
+                                    {
+                                        data !== "Admin" && (
+                                            <div className="createResume-download" onClick={downloadresume}>
+                                                Download
+                                            </div>
+                                        )
+                                    }
                                 </>
                             )
                         }
 
                         {
-                            !IsAuthed(user) &&
+                            !IsAuthed(user) || admin.admin === "true" &&
                             <div className="createResume-download" onClick={() => navigate('/sign-in', { state: { path: window.location.pathname } })}>
                                 Login
                             </div>

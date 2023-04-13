@@ -1,7 +1,7 @@
 import ADMIN_ACTION_TYPES from './admin-type';
 
 export const ADMIN_INITIAL_STATE = {
-    currentAdmin: [],
+    currentAdmin: {admin: false},
     error: [],
 };
 

@@ -34,6 +34,21 @@ class ResumeRecommendationController extends Controller
         return ["resume" => $resume];
     }
 
+    public function updateRecommendationResume(Request $request)
+    {
+
+        $resume = ResumeRecommendation::updateOrCreate(
+            ['slug' => $request->input('slug')], // find resume by slug
+            [
+                'title' => $request->input('title'),
+                'slug' => $request->input('slug'),
+                'ResumeData' => $request->input('data'),
+            ] // update or create a new resume
+        );
+
+        return ["resume" => $resume];
+    }
+
     public function deleteRecommendationResume($id)
     {
         $resume = ResumeRecommendation::findOrFail($id); // Find the resume by ID

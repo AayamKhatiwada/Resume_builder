@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResumeRecommendationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,8 +36,12 @@ Route::get('getResume/{id}', [UserResumeController::class, 'show']);
 
 Route::get('getRecommendationResume', [ResumeRecommendationController::class, 'show']);
 
+Route::get('getAllInfo', [Controller::class, 'getAllInfo']);
+
 Route::get('getCommunityResume', [UserResumeController::class, 'communityResumes']);
 
 Route::post('registerRecommendationResume', [ResumeRecommendationController::class, 'registerRecommendationResume']);
+
+Route::post('updateRecommendationResume', [ResumeRecommendationController::class, 'updateRecommendationResume']);
 
 Route::get('deleteRecommendationResume/{id}', [ResumeRecommendationController::class, 'deleteRecommendationResume']);
