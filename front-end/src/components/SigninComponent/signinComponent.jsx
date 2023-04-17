@@ -34,6 +34,15 @@ const SigninComponent = () => {
         }
     }
 
+    const checkInputs = () => {
+        // Check if email is valid
+        if (!(/\S+@\S+\.\S+/.test(email))) {
+            ErrorNoty("Invalid email address.");
+        } else {
+            login()
+        }
+    }
+
     return (
         <div className="container">
             <div className="row">
@@ -44,11 +53,11 @@ const SigninComponent = () => {
                     </div>
                     <div>
                         <h3>Email</h3>
-                        <input type="text" placeholder="Please enter your email address" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                        <input type="text" placeholder="Please enter your email address" value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div>
                         <h3>Password</h3>
-                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div className='same-line-spaceBetween'>
                         <div className='same-line'>
@@ -59,7 +68,7 @@ const SigninComponent = () => {
                         </div>
                         <a href='/'>Forget Password</a>
                     </div>
-                    <button type="button" className='btn btn-success button-style' onClick={() => login()}>Sign in</button>
+                    <button type="button" className='btn btn-success button-style' onClick={() => checkInputs()}>Sign in</button>
                     <button type="button" className='btn btn-light button-style'>Sign in with Google</button>
                     <div className='text-center'>Dont't have an account? &nbsp;<p onClick={() => navigate('/register', { state: { path: window.location.pathname } })}>Sign Up</p></div>
                 </div>
