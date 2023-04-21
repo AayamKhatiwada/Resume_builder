@@ -1,9 +1,9 @@
 .left-side{
-    padding: 8rem;
+    margin: auto;
 }
 
-input{
-    padding: 10px;
+.signin-textfield{
+    padding: 10px 0;
     width: 100%;
 }
 
@@ -23,5 +23,5 @@ input{
 }
 
 .image-style{
-    margin: 50px;
+    margin: auto;
 }

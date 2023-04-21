@@ -1,11 +1,15 @@
 import './registerComponent.css';
 import Image from '../assets/resume_builder.jpg';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser, setUserError } from '../../store/user/user-action';
 import { ErrorNoty } from '../../hooks/notifications';
+import InputAdornment from '@mui/material/InputAdornment';
+import { FormControl, IconButton, InputLabel, OutlinedInput } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const RegisterComponent = () => {
 
@@ -18,6 +22,12 @@ const RegisterComponent = () => {
     const [password, setPassword] = useState("");
     const [cpassword, setCpassword] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
+
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const [showCpassword, setShowCpassword] = useState(false);
+    const handleClickShowCpassword = () => setShowCpassword((show) => !show);
 
     const register = async () => {
         let user = { fname, lname, email, phoneNo, password };
@@ -51,7 +61,7 @@ const RegisterComponent = () => {
             ErrorNoty("First name must not start with space")
         } else if (fname.length < 3) {
             ErrorNoty("First name must be more than or equal to 3 letter")
-        }else if (!lname) {
+        } else if (!lname) {
             ErrorNoty("Cannot leave last name blank")
         } else if (lname[0] === " ") {
             ErrorNoty("last name must not start with space")
@@ -83,7 +93,7 @@ const RegisterComponent = () => {
         <div>
             <div className="container">
                 <div className="row">
-                    <div className="col-sm-6" style={{margin: "auto"}}>
+                    <div className="col-sm-6" style={{ margin: "auto" }}>
                         <img src={Image} alt="Voter_box" width="80%" className='image-style' style={{ margin: "70px 20px" }} />
                     </div>
                     <div className="col-sm-6 left-side-register">
@@ -121,24 +131,50 @@ const RegisterComponent = () => {
                             />
                         </div>
                         <div className='form-text-field'>
-                            <TextField
-                                label="Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                fullWidth
-                                InputProps={{ style: { fontSize: 14 } }}
-                                InputLabelProps={{ style: { fontSize: 14 } }}
-                            />
+                            <FormControl sx={{ fontSize: 14, width: "100%" }} variant="outlined">
+                                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-password"
+                                    type={showPassword ? 'text' : 'password'}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                edge="end"
+                                            >
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                    label="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </FormControl>
                         </div>
                         <div className='form-text-field'>
-                            <TextField
-                                label="Confirm Password"
-                                value={cpassword}
-                                onChange={(e) => setCpassword(e.target.value)}
-                                fullWidth
-                                InputProps={{ style: { fontSize: 14 } }}
-                                InputLabelProps={{ style: { fontSize: 14 } }}
-                            />
+                            <FormControl sx={{ fontSize: 14, width: "100%" }} variant="outlined">
+                                <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-password"
+                                    type={showCpassword ? 'text' : 'password'}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowCpassword}
+                                                edge="end"
+                                            >
+                                                {showCpassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                    label="Conform Password"
+                                    value={cpassword}
+                                    onChange={(e) => setCpassword(e.target.value)}
+                                />
+                            </FormControl>
                         </div>
                         <div className='form-text-field'>
                             <TextField

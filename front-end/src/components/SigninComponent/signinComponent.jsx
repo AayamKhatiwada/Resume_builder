@@ -5,6 +5,10 @@ import { useDispatch } from 'react-redux';
 import { setCurrentUser, setUserError } from '../../store/user/user-action';
 import { ErrorNoty, SuccessNoty } from '../../hooks/notifications';
 import { useNavigate } from 'react-router-dom';
+import { FormControl, InputLabel, OutlinedInput, IconButton, TextField } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
 
 const SigninComponent = () => {
 
@@ -13,6 +17,9 @@ const SigninComponent = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const login = async () => {
         let user = { email, password };
@@ -51,13 +58,38 @@ const SigninComponent = () => {
                         <h1>Welcome Back</h1>
                         <p>Welcome back please enter your details</p>
                     </div>
-                    <div>
-                        <h3>Email</h3>
-                        <input type="text" placeholder="Please enter your email address" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <div className='signin-textfield'>
+                        <TextField
+                            label="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            fullWidth
+                            InputProps={{ style: { fontSize: 18 } }}
+                            InputLabelProps={{ style: { fontSize: 18 } }}
+                        />
                     </div>
-                    <div>
-                        <h3>Password</h3>
-                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <div className='signin-textfield'>
+                        <FormControl sx={{ fontSize: 14, width: "100%" }} variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-password"
+                                type={showPassword ? 'text' : 'password'}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            edge="end"
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </FormControl>
                     </div>
                     <div className='same-line-spaceBetween'>
                         <div className='same-line'>
@@ -72,8 +104,8 @@ const SigninComponent = () => {
                     <button type="button" className='btn btn-light button-style'>Sign in with Google</button>
                     <div className='text-center'>Dont't have an account? &nbsp;<p onClick={() => navigate('/register', { state: { path: window.location.pathname } })}>Sign Up</p></div>
                 </div>
-                <div className="col-sm-6">
-                    <img src={Image} alt="Voter_box" width="90%" className='image-style' />
+                <div className="col-sm-6" style={{objectFit: "contain"}}>
+                    <img src={Image} alt="Voter_box" width="80%" className='image-style' />
                 </div>
             </div>
         </div>
