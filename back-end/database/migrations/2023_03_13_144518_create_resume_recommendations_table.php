@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('slug');
             $table->string('title');
             $table->binary('image');
-            $table->text('ResumeData');
+            $table->longText('ResumeData');
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('slug');
             $table->string('title');
             $table->boolean('include_in_community')->default(0);
-            $table->text('ResumeData');
+            $table->longText('ResumeData');
             $table->rememberToken();
             $table->timestamps();
         });

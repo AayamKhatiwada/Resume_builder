@@ -4,11 +4,11 @@ import html2canvas from 'html2canvas';
 const CreateTemplate = (element, i) => {
 
     var temp = document.createElement('div');
-    temp.innerHTML = element;
+    temp.innerHTML = '<div>' + element + '</div>';
     var htmlObject = temp.firstChild;
     document.body.appendChild(htmlObject);
     console.log(htmlObject)
-    
+
     // Use html2canvas to create a canvas with the HTML content
     html2canvas(htmlObject).then(canvas => {
 

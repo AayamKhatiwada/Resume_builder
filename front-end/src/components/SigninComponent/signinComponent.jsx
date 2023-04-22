@@ -51,9 +51,9 @@ const SigninComponent = () => {
     }
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-sm-6 left-side">
+        <div className="container" style={{margin: "8rem auto"}}>
+            <div className="row justify-content-between">
+                <div className="col-sm-5 left-side">
                     <div className='text-center'>
                         <h1>Welcome Back</h1>
                         <p>Welcome back please enter your details</p>
@@ -105,7 +105,7 @@ const SigninComponent = () => {
                     <button type="button" className='btn btn-light button-style'>Sign in with Google</button>
                     <div className='text-center'>Dont't have an account? &nbsp;<p onClick={() => navigate('/register', { state: { path: window.location.pathname } })}>Sign Up</p></div>
                 </div>
-                <div className="col-sm-6" style={{objectFit: "contain"}}>
+                <div className="col-sm-5" style={{objectFit: "contain"}}>
                     <img src={Image} alt="Voter_box" width="80%" className='image-style' />
                 </div>
             </div>

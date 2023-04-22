@@ -1885,6 +1885,14 @@
     "@progress/kendo-draggable-common" "^0.2.3"
     prop-types "^15.6.0"
 
+"@progress/kendo-react-common@5.12.1":
+  version "5.12.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-react-common/-/kendo-react-common-5.12.1.tgz#2a1a43f3662694fc8d25e04f5cc6c90cef27b5ce"
+  integrity sha512-s438HDJbyg/5nyJn6yDj4mnAqjEC0b8eVe2OsFj12BUHMVvXsXvh4HbDZGRQg+Y7G2ywPNakfXWrITAvlrq+WA==
+  dependencies:
+    "@progress/kendo-draggable-common" "^0.2.3"
+    prop-types "^15.6.0"
+
 "@progress/kendo-react-dialogs@5.11.0", "@progress/kendo-react-dialogs@^5.11.0":
   version "5.11.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-react-dialogs/-/kendo-react-dialogs-5.11.0.tgz#536694415f22031ab571fd9784e4680f3a37f2a8"
@@ -1903,13 +1911,13 @@
     "@progress/kendo-react-popup" "5.11.0"
     prop-types "^15.6.0"
 
-"@progress/kendo-react-editor@^5.11.0":
-  version "5.11.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-react-editor/-/kendo-react-editor-5.11.0.tgz#79dbab649eef434a52c59927a416beea6243709b"
-  integrity sha512-lSMTB01/OvYxp/Ocj2KKspQIUoOl0Rll0+4UqNylfprD2gDdDl4uCRujtgfNV/1Js5VJcCf/TMAVIc4QL8uH9Q==
+"@progress/kendo-react-editor@^5.12.1":
+  version "5.12.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-react-editor/-/kendo-react-editor-5.12.1.tgz#cd28d5bc7f759bdc16d5647c2a441894bd66bee8"
+  integrity sha512-OTqJWTcYO85bvUD337cnOmDlQua2j2z+0OXF2xHF3HStdv8FQAO3zFkqGyc05oPUK/R1bQR2zVvFCduUOJpoPg==
   dependencies:
     "@progress/kendo-editor-common" "1.9.4"
-    "@progress/kendo-react-common" "5.11.0"
+    "@progress/kendo-react-common" "5.12.1"
     prop-types "^15.6.0"
 
 "@progress/kendo-react-form@^5.11.0":

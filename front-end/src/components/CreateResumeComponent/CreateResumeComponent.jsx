@@ -74,7 +74,7 @@ const CreateResumeComponent = () => {
 
     const location = useLocation();
     const data = location.state;
-    // console.log(data)
+    console.log(data)
 
     const handleChangeChecked = (event) => {
         setChecked(event.target.checked);
@@ -125,6 +125,7 @@ const CreateResumeComponent = () => {
             data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)),
             include_in_community: data === "Community" ? false : checked
         };
+        // console.log(EditorUtils.getHtml(content.current.view.state))
         let result = await fetch("http://127.0.0.1:8000/api/saveResume", {
             method: "POST",
             headers: {
@@ -134,11 +135,11 @@ const CreateResumeComponent = () => {
             body: JSON.stringify(resume)
         });
         result = await result.json();
-        SuccessNoty("Data has been stored")
-        if (result['error']) {
-            alert(result['error'])
-        } else if (result['resume']) {
+        if (result['resume']) {
+            SuccessNoty("Data has been stored")
             console.log(result['resume'])
+        }else{
+            ErrorNoty("Trouble storing data")
         }
     }
 
@@ -148,6 +149,7 @@ const CreateResumeComponent = () => {
             title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName,
             data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)),
         };
+        console.log(resume)
         let result = await fetch("http://127.0.0.1:8000/api/updateRecommendationResume", {
             method: "POST",
             headers: {
@@ -157,12 +159,11 @@ const CreateResumeComponent = () => {
             body: JSON.stringify(resume)
         });
         result = await result.json();
-        console.log(result)
-        SuccessNoty("Data has been stored")
-        if (result['error']) {
-            alert(result['error'])
-        } else if (result['resume']) {
+        if (result['resume']) {
+            SuccessNoty("Data has been stored")
             console.log(result['resume'])
+        }else{
+            ErrorNoty("Trouble storing data")
         }
     }
 
@@ -247,7 +248,7 @@ const CreateResumeComponent = () => {
                         }
 
                         {
-                            !IsAuthed(user) || admin.admin === "true" &&
+                            (!IsAuthed(user) || admin.admin !== "true") &&
                             <div className="createResume-download" onClick={() => navigate('/sign-in', { state: { path: window.location.pathname } })}>
                                 Login
                             </div>
