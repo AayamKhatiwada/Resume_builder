@@ -30,7 +30,6 @@ class DatabaseSeeder extends Seeder
         $user->fname = "Aayam";
         $user->lname = "Khatiwada";
         $user->email = "aayam@gmail.com";
-        $user->phoneno = "9818354005";
         $user->password = Hash::make("123");
         $user->save();
 

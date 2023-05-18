@@ -1,80 +1,15 @@
-/* Custom styles for the main content */
 .main-content {
     margin-left: 240px;
-    /* To make room for the sidebar */
-    padding: 16px;
+    padding: 0.5rem 3rem;
 }
 
-.floating-button {
-    border: none;
-    position: fixed;
-    bottom: 3.5rem;
-    right: 3.5rem;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 32px;
-    line-height: 60px;
-    text-align: center;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
-    z-index: 9999;
-    transition: all 0.2s ease-in-out;
-}
-
-.floating-button:hover
-{
-    width: 70px;
-    height: 70px;
-    font-size: 36px;
-    line-height: 70px;
-    box-shadow: 0 8px 13px rgba(0, 0, 0, 0.6);
-    color: #fff;
-    background-color: #0271e9;
-}
-
-.floating-menu {
-    position: fixed;
-    bottom: 3rem;
-    right: 8rem;
-    width: 300px;
-    padding: 8px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    z-index: 9998;
-}
-
-.floating-menu ul,
-.floating-menu-admin ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.floating-menu li,
-.floating-menu-admin li {
-    padding: 6px 12px;
-    cursor: pointer;
-}
-
-.floating-menu-admin {
-    position: fixed;
-    top: 6rem;
-    right: 1rem;
-    width: 300px;
-    padding: 8px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
-    z-index: 9998;
-}
-
-.floating-menu li:hover,
-.sidebar-sticky li:hover
-{
-    background-color: #f5f5f5;
+.admin-dashboard-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
 }
 
 .admin-button {
@@ -88,4 +23,31 @@
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
     z-index: 9999;
     transition: all 0.2s ease-in-out;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+}
+
+.admin-profile img {
+    margin-right: 2rem;
+}
+
+.admin-nav-dropdown {
+    padding: 0;
+    margin-left: 8rem !important;
+}
+
+.admin-nav-dropdown>* {
+    color: black;
+    font-size: medium;
+    padding: 1rem 2rem;
+    background-color: rgb(156, 156, 156);
+}
+
+.admin-nav-dropdown>*:hover {
+    background-color: rgb(83, 83, 83);
+    color: white;
+    cursor: pointer;
 }

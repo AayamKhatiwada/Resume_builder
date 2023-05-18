@@ -19,15 +19,6 @@ class ResumeRecommendationController extends Controller
         $resume = new ResumeRecommendation;
         $resume->slug = Str::slug($request->input('name'));
         $resume->title = $request->input('name');
-        
-        if($request->hasFile('image')){
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().".".$extension;
-            $file->move('uploads/recommendationImage/', $filename);
-            $resume->image = $filename;
-        }
-        
         $resume->ResumeData = $request->input('htmlData');
         $resume->save();
 

@@ -1,15 +1,16 @@
 import './registerComponent.css';
 import Image from '../assets/resume_builder.jpg';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser, setUserError } from '../../store/user/user-action';
-import { ErrorNoty } from '../../hooks/notifications';
+import { ErrorNoty, SuccessNoty } from '../../hooks/notifications';
 import InputAdornment from '@mui/material/InputAdornment';
 import { FormControl, IconButton, InputLabel, OutlinedInput } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import jwt_decode from "jwt-decode"
 
 const RegisterComponent = () => {
 
@@ -21,7 +22,6 @@ const RegisterComponent = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [cpassword, setCpassword] = useState("");
-    const [phoneNo, setPhoneNo] = useState("");
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -29,9 +29,36 @@ const RegisterComponent = () => {
     const [showCpassword, setShowCpassword] = useState(false);
     const handleClickShowCpassword = () => setShowCpassword((show) => !show);
 
+    useEffect(() => {
+        /* global google */
+        google.accounts.id.initialize({
+            client_id: "365026754391-98sqgrid92rv2235v67aqkim7bgf4o6u.apps.googleusercontent.com",
+            callback: handleCallbackResponse,
+            oauth2_include_granted_scopes: true,
+        })
+
+        google.accounts.id.renderButton(
+            document.getElementById("signInWithDiv"),
+            {
+                theme: "outline", size: "large", custom_styles: {
+                    width: "100%",
+                },
+            }
+        )
+
+    }, [])
+
+    const handleCallbackResponse = (response) => {
+        // console.log("Encoded JWT ID token: " + response.credential)
+        var userObject = jwt_decode(response.credential)
+        setFname(userObject.given_name)
+        setLname(userObject.family_name)
+        setEmail(userObject.email)
+     }
+
     const register = async () => {
-        let user = { fname, lname, email, phoneNo, password };
-        if (fname !== '' && fname !== '' && email !== '' && phoneNo !== '' && password !== '' && cpassword !== '') {
+        let user = { fname, lname, email, password };
+        if (fname !== '' && fname !== '' && email !== '' && password !== '' && cpassword !== '') {
             let result = await fetch("http://127.0.0.1:8000/api/register", {
                 method: "POST",
                 headers: {
@@ -45,7 +72,7 @@ const RegisterComponent = () => {
                 dispatch(setUserError(result['error']));
                 alert(result['error'])
             } else if (result['user']) {
-                alert("success")
+                SuccessNoty("Successfull register a user")
                 dispatch(setCurrentUser(result['user']));
                 navigate('/');
             }
@@ -77,17 +104,10 @@ const RegisterComponent = () => {
             ErrorNoty("Password must be more than or equal to 3 letter")
         } else if (cpassword !== password) {
             ErrorNoty("Mismatch password and conform password")
-        } else if (!phoneNo) {
-            ErrorNoty("Cannot leave phone number blank")
-        } else if (phoneNo[0] === " ") {
-            ErrorNoty("Phone number must not start with space")
-        } else if (phoneNo.length !== 10) {
-            ErrorNoty("Phone number must be of 10 digits")
         } else {
             register()
         }
     }
-
 
     return (
         <div>
@@ -176,18 +196,8 @@ const RegisterComponent = () => {
                                 />
                             </FormControl>
                         </div>
-                        <div className='form-text-field'>
-                            <TextField
-                                label="Phone Number"
-                                value={phoneNo}
-                                onChange={(e) => setPhoneNo(e.target.value)}
-                                fullWidth
-                                InputProps={{ style: { fontSize: 14 } }}
-                                InputLabelProps={{ style: { fontSize: 14 } }}
-                            />
-                        </div>
                         <button type="button" className='btn btn-success button-style' onClick={() => checkInputsAndRegister()}>Register</button>
-                        <button type="button" className='btn btn-light button-style'>Sign Up with Google</button>
+                        <button type="button" id="signInWithDiv" style={{width: "100%", border: "none"}}></button>
                         <p className='text-center m-0'>Already have an account? &nbsp;<a href="/sign-in">Sign In</a></p>
                     </div>
                 </div>

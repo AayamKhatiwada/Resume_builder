@@ -1,0 +1,8 @@
+.party-add-button {
+    display: flex;
+    justify-content: end;
+}
+
+.party-add-button>a {
+    padding: 1rem 2rem;
+}

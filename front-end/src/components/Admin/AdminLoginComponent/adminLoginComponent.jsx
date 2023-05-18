@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ErrorNoty, SuccessNoty } from '../../../hooks/notifications';
 import { setCurrentAdmin } from '../../../store/admin/admin-action';
 import './adminLoginComponent.css'
+import { ErrorNoty } from '../../../hooks/notifications';
 
 const AdminLoginComponent = () => {
 
@@ -12,23 +12,16 @@ const AdminLoginComponent = () => {
     const [password, setPassword] = useState("")
     const dispatch = useDispatch()
 
-    const onSubmit = async () => {
-
-        let result = await fetch("http://127.0.0.1:8000/api/adminCheck", {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            body: JSON.stringify({admin, password})
-        });
-        result = await result.json();
-        if (result.admin) {
-            SuccessNoty("Successfully logined as admin")
-            dispatch(setCurrentAdmin(result))
-            navigate('/dashboard')
-        }else{
-            ErrorNoty(result.error)
+    const onSubmit = () => {
+        if (admin === "admin" && password === "admin") {
+            dispatch(setCurrentAdmin({admin: "admin", password: "admin"}))
+            navigate('/admin/')
+        } else if (admin === "admin") {
+            ErrorNoty("Wrong Password")
+        } else if (password === "admin") {
+            ErrorNoty("Wrong admin")
+        } else {
+            ErrorNoty("Wrong admin and password")
         }
     }
 

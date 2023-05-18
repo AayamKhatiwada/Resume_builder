@@ -61,13 +61,11 @@ const CreateResumeComponent = () => {
 
     const navigate = useNavigate();
     const user = useSelector(selectCurrentUser)
-    const admin = useSelector(selectCurrentAdmin)
     const content = createRef();
     const [isrecommendation, setIsRecommendation] = useState(false)
     var { slugPara } = useParams();
     const [documentName, setDocumentName] = useState("Document");
     const allResumeData = useSelector(selectCurrentResume);
-    const dummyRecommendationResume = useSelector(selectCurrentRecommendationResume);
     const communityResume = useSelector(selectCurrentCommunityResume);
     const [checked, setChecked] = useState(false);
     const [checkedData, setCheckedData] = useState(checked ? "Make it public" : "Keep it private")
@@ -91,14 +89,6 @@ const CreateResumeComponent = () => {
                 setDocumentName(data.title)
                 EditorUtils.setHtml(content.current.view, JSON.parse(data.ResumeData));
                 setIsRecommendation(false)
-            }
-        })
-
-        dummyRecommendationResume.map((data) => {
-            if (data.slug === slugPara) {
-                setDocumentName(data.title)
-                EditorUtils.setHtml(content.current.view, JSON.parse(data.ResumeData));
-                setIsRecommendation(true)
             }
         })
 
@@ -138,42 +128,16 @@ const CreateResumeComponent = () => {
         if (result['resume']) {
             SuccessNoty("Data has been stored")
             console.log(result['resume'])
-        }else{
-            ErrorNoty("Trouble storing data")
-        }
-    }
-
-    const saveRecommendation = async () => {
-        let resume = {
-            slug: slugPara,
-            title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName,
-            data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)),
-        };
-        console.log(resume)
-        let result = await fetch("http://127.0.0.1:8000/api/updateRecommendationResume", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            body: JSON.stringify(resume)
-        });
-        result = await result.json();
-        if (result['resume']) {
-            SuccessNoty("Data has been stored")
-            console.log(result['resume'])
-        }else{
+        } else {
             ErrorNoty("Trouble storing data")
         }
     }
 
     const checkLoginAndSave = () => {
-        if (!IsAuthed(user) && admin.admin === false) {
+        if (!IsAuthed(user)) {
             ErrorNoty("Cannot save your Resume please login")
         } else if (IsAuthed(user)) {
             saveToDatabase()
-        } else if (admin.admin === "true") {
-            saveRecommendation()
         }
     }
 
@@ -213,26 +177,19 @@ const CreateResumeComponent = () => {
 
                     <div className='createResume-options'>
                         {
-                            (isrecommendation || data === "Community") && data !== "Admin" ? (
+                            (isrecommendation || data === "Community") ? (
                                 <div className="createResume-save" onClick={checkLoginAndSave}>
                                     Save a copy
                                 </div>
                             ) : (
                                 <>
-                                    {
-                                        data !== "Admin" && (
-                                            <>
-                                                {checkedData}
-
-                                                < Switch
-                                                    checked={checked}
-                                                    onChange={handleChangeChecked}
-                                                    inputProps={{ 'aria-label': 'controlled' }}
-                                                    color="warning"
-                                                />
-                                            </>
-                                        )
-                                    }
+                                    {checkedData}
+                                    < Switch
+                                        checked={checked}
+                                        onChange={handleChangeChecked}
+                                        inputProps={{ 'aria-label': 'controlled' }}
+                                        color="warning"
+                                    />
                                     <div className="createResume-save" onClick={checkLoginAndSave}>
                                         Save
                                     </div>
@@ -248,7 +205,7 @@ const CreateResumeComponent = () => {
                         }
 
                         {
-                            (!IsAuthed(user) || admin.admin !== "true") &&
+                            (!IsAuthed(user)) &&
                             <div className="createResume-download" onClick={() => navigate('/sign-in', { state: { path: window.location.pathname } })}>
                                 Login
                             </div>
@@ -281,7 +238,7 @@ const CreateResumeComponent = () => {
                     height: 630
                 }} ref={content} />
             </div>
-        </div>
+        </div >
     );
 }
 

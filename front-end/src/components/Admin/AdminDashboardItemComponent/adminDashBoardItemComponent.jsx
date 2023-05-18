@@ -1,67 +1,35 @@
-import { useEffect, useState } from 'react'
+import AdminDashboardComponent from '../AdminDashboardComponent/adminDashboardComponent';
 import './adminDashboardItemComponent.css'
 
 const AdminDashboardItemComponent = () => {
-
-    const [resumeData, setResumeData] = useState([])
-
-    useEffect(() => {
-        const getAllData = () => {
-            fetch('http://127.0.0.1:8000/api/getAllInfo')
-                .then(res => res.json())
-                .then(
-                    (result) => {
-                        setResumeData(result)
-                        console.log(result)
-                    },
-                    (error) => {
-                        console.log(error)
-                    }
-                )
-        }
-        resumeData.length === 0 && getAllData()
-    }, [])
-
     return (
         <>
-            <section> 
-                <div className="container mt-5">
-                    <div className="row">
-                        <div className="col-md-4">
-                            <div className="card">
-                                <div className="card-body">
-                                    <h5 className="card-title">Resumes</h5>
-                                    <p className="card-text">{resumeData.resumes}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="card">
-                                <div className="card-body">
-                                    <h5 className="card-title">Recommended Resumes</h5>
-                                    <p className="card-text">{resumeData.recommendationResume}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="card">
+            <AdminDashboardComponent>
+                <section>
+                    <div className="container mt-5">
+                        <div className="row admindashboard-cards">
+                            <div className="col-md-3">
                                 <div className="card-body">
                                     <h5 className="card-title">Users</h5>
-                                    <p className="card-text">{resumeData.user_count}</p>
+                                    <p className="card-text">10</p>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-md-4 my-5">
-                            <div className="card">
+                            <div className="col-md-3">
                                 <div className="card-body">
-                                    <h5 className="card-title">Community Resume</h5>
-                                    <p className="card-text">{resumeData.commmunity_resume}</p>
+                                    <h5 className="card-title">Party</h5>
+                                    <p className="card-text">10</p>
+                                </div>
+                            </div>
+                            <div className="col-md-3">
+                                <div className="card-body">
+                                    <h5 className="card-title">Candidate</h5>
+                                    <p className="card-text">10</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </AdminDashboardComponent>
         </>
     )
 }
