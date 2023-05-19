@@ -14,12 +14,10 @@ const AdminDashboardComponent = ({children}) => {
         name = "Dashboard"
     }else if (currentUrl.includes("/admin/templates")){
         name = "Templates"
-    } else if (currentUrl.includes("/admin/party")){
-        name = "Party"
-    } else if (currentUrl.includes("/admin/candidate")){
-        name = "Candidate"
-    } else if (currentUrl.includes("/admin/election")){
-        name = "Election"
+    } else if (currentUrl.includes("/admin/users")){
+        name = "Users"
+    } else if (currentUrl.includes("/admin/community")){
+        name = "Community"
     }
 
     const logout = () => {
@@ -32,7 +30,7 @@ const AdminDashboardComponent = ({children}) => {
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-10 main-content">
-                        <div className='admin-dashboard-header' style={{background: "#2f2f2f", borderRadius: "30px"}}>
+                        <div className='admin-dashboard-header' style={{background: "rgb(91 88 88)", borderRadius: "30px"}}>
                             <div className="h1 text-white">{name}</div>
                             <div className="dropdown">
                                 <div className="admin-profile" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown">

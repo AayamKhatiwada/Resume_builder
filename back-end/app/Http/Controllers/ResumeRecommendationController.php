@@ -13,18 +13,6 @@ class ResumeRecommendationController extends Controller
         return ResumeRecommendation::all();
     }
 
-    public function registerRecommendationResume(Request $request)
-    {
-        
-        $resume = new ResumeRecommendation;
-        $resume->slug = Str::slug($request->input('name'));
-        $resume->title = $request->input('name');
-        $resume->ResumeData = $request->input('htmlData');
-        $resume->save();
-
-        return ["resume" => $resume];
-    }
-
     public function updateRecommendationResume(Request $request)
     {
 

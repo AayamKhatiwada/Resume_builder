@@ -5,27 +5,13 @@ import CreateImage from '../../hooks/createImage';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentCommunityResume } from '../../store/resume/resume-action';
 import { selectCurrentCommunityResume } from '../../store/resume/resume-selector';
+import CreateTemplate from '../../hooks/createTemplate';
 
 const CommunityComponent = () => {
 
-    const dispatch = useDispatch()
     const navigate = useNavigate()
     const communityResume = useSelector(selectCurrentCommunityResume);
     console.log(communityResume)
-
-    useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/getCommunityResume`)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result)
-                    dispatch(setCurrentCommunityResume(result));
-                },
-                (error) => {
-                    console.log(error)
-                }
-            )
-    }, [])
 
     return (
         <>
@@ -48,14 +34,13 @@ const CommunityComponent = () => {
                                     var date = new Date(resume.updated_at);
                                     const dateFormatted = date.toLocaleString('en-US', options)
                                     // console.log(JSON.parse(resume.ResumeData))
-                                    // CreateTemplate(JSON.parse(resume.ResumeData), resume.id)
-                                    const ImgUrl = CreateImage(resume.title)
+                                    CreateTemplate(JSON.parse(resume.ResumeData), resume.slug)
 
                                     return (
                                         <div className="col-sm-3 m-3 card" key={resume.id}>
                                             <div onClick={() => navigate(`/createResume/${resume.slug}`, { state: "Community" })} className="link">
                                                 <div className="">
-                                                    <img src={ImgUrl} alt="Random" className="card-img-top" width="180px" height="210px" id={`UserResumeImageresume.id}`} style={{ objectFit: "scale-down" }} />
+                                                    <img src="" alt="Random" className="card-img-top" width="180px" height="210px" id={`UserResumeImage${resume.slug}`} style={{ objectFit: "scale-down",padding:"1rem" }} />
                                                     <hr />
                                                     <div className="cards-text">
                                                         <h5>{resume.title}</h5>

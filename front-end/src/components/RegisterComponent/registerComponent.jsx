@@ -29,32 +29,32 @@ const RegisterComponent = () => {
     const [showCpassword, setShowCpassword] = useState(false);
     const handleClickShowCpassword = () => setShowCpassword((show) => !show);
 
-    useEffect(() => {
-        /* global google */
-        google.accounts.id.initialize({
-            client_id: "365026754391-98sqgrid92rv2235v67aqkim7bgf4o6u.apps.googleusercontent.com",
-            callback: handleCallbackResponse,
-            oauth2_include_granted_scopes: true,
-        })
+    // useEffect(() => {
+    //     /* global google */
+    //     google.accounts.id.initialize({
+    //         client_id: "365026754391-98sqgrid92rv2235v67aqkim7bgf4o6u.apps.googleusercontent.com",
+    //         callback: handleCallbackResponse,
+    //         oauth2_include_granted_scopes: true,
+    //     })
 
-        google.accounts.id.renderButton(
-            document.getElementById("signInWithDiv"),
-            {
-                theme: "outline", size: "large", custom_styles: {
-                    width: "100%",
-                },
-            }
-        )
+    //     google.accounts.id.renderButton(
+    //         document.getElementById("signInWithDiv"),
+    //         {
+    //             theme: "outline", size: "large", custom_styles: {
+    //                 width: "100%",
+    //             },
+    //         }
+    //     )
 
-    }, [])
+    // }, [])
 
-    const handleCallbackResponse = (response) => {
-        // console.log("Encoded JWT ID token: " + response.credential)
-        var userObject = jwt_decode(response.credential)
-        setFname(userObject.given_name)
-        setLname(userObject.family_name)
-        setEmail(userObject.email)
-     }
+    // const handleCallbackResponse = (response) => {
+    //     // console.log("Encoded JWT ID token: " + response.credential)
+    //     var userObject = jwt_decode(response.credential)
+    //     setFname(userObject.given_name)
+    //     setLname(userObject.family_name)
+    //     setEmail(userObject.email)
+    //  }
 
     const register = async () => {
         let user = { fname, lname, email, password };
@@ -197,7 +197,7 @@ const RegisterComponent = () => {
                             </FormControl>
                         </div>
                         <button type="button" className='btn btn-success button-style' onClick={() => checkInputsAndRegister()}>Register</button>
-                        <button type="button" id="signInWithDiv" style={{width: "100%", border: "none"}}></button>
+                        {/* <button type="button" id="signInWithDiv" style={{width: "100%", border: "none"}}></button> */}
                         <p className='text-center m-0'>Already have an account? &nbsp;<a href="/sign-in">Sign In</a></p>
                     </div>
                 </div>

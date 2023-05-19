@@ -9,7 +9,6 @@ import { setCurrentResume } from '../../store/resume/resume-action';
 import FooterComponent from '../FooterComponent/footerComponent';
 import { selectCurrentUser } from '../../store/user/user-selector';
 import IsAuthed from '../../hooks/isAuthed';
-import CreateImage from '../../hooks/createImage';
 import CreateTemplate from '../../hooks/createTemplate';
 
 const OptionComponent = () => {
@@ -32,6 +31,7 @@ const OptionComponent = () => {
                 }
             )
     }, [])
+    console.log(dummyResume)
 
     return (
         <>
@@ -40,7 +40,7 @@ const OptionComponent = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <a className="navbar-brand mx-sm-4" href="/">
-                    <img src="https://via.placeholder.com/150x150" alt="Logo" />
+                    <img src="https://via.placeholder.com/150x150" alt="Logo"/>
                 </a>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <form className="form-inline my-2 my-lg-0">
@@ -59,7 +59,7 @@ const OptionComponent = () => {
                         <div className="col-sm-2 mb-4 cards">
                             <Link to={`/createResume/${randomSlug}`} className="link">
                                 <div className="">
-                                    <img src={DocBlank} alt="Random" className="card-img-top" width="180px" height="280px"/>
+                                    <img src={DocBlank} alt="Random" className="card-img-top" width="200px" height="200px" style={{objectFit: "cover"}}/>
                                     <div className="cards-text">
                                         <h5 style={{ color: "black" }}>New Resume</h5>
                                     </div>
@@ -68,11 +68,12 @@ const OptionComponent = () => {
                         </div>
                         {
                             dummyRecommendationResume?.map((resume) => {
+                                CreateTemplate(JSON.parse(resume.ResumeData), resume.slug)
                                 return (
                                     <div className="col-sm-2 mb-4 cards" key={resume.id}>
                                         <Link to={`/createResume/${resume.slug}`} className="link">
                                             <div className="">
-                                                <img src={`http://127.0.0.1:8000/uploads/recommendationImage/${resume.image}`} alt="Random" className="card-img-top" width="180px" height="280px" style={{objectFit: "cover"}}/>
+                                                <img src={''} alt="Random" className="option-card-img-top" id={`UserResumeImage${resume.slug}`} />
                                                 <div className="cards-text">
                                                     <h5>{resume.title}</h5>
                                                 </div>
@@ -102,15 +103,13 @@ const OptionComponent = () => {
                                     var date = new Date(resume.updated_at);
                                     const dateFormatted = date.toLocaleString('en-US', options)
                                     console.log(JSON.parse(resume.ResumeData))
-                                    const imgurl = CreateTemplate(JSON.parse(resume.ResumeData), resume.id)
-
-                                    // const ImgUrl = CreateImage(resume.title)
+                                    CreateTemplate(JSON.parse(resume.ResumeData), resume.id)
 
                                     return (
                                         <div className="col-sm-2 mb-4 cards card" key={resume.id}>
                                             <Link to={`/createResume/${resume.slug}`} className="link">
                                                 <div className="">
-                                                    <img src={imgurl} alt="Random" className="option-card-img-top" id={`UserResumeImage${resume.id}`} style={{ objectFit: "contain" }} />
+                                                    <img src={''} alt="Random" className="option-card-img-top" id={`UserResumeImage${resume.id}`}/>
                                                     <hr />
                                                     <div className="cards-text">
                                                         <h5>{resume.title}</h5>

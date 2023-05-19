@@ -102,7 +102,7 @@ const SigninComponent = () => {
                         <a href='/'>Forget Password</a>
                     </div>
                     <button type="button" className='btn btn-success button-style' onClick={() => checkInputs()}>Sign in</button>
-                    <button type="button" className='btn btn-light button-style'>Sign in with Google</button>
+                    {/* <button type="button" className='btn btn-light button-style'>Sign in with Google</button> */}
                     <div className='text-center'>Dont't have an account? &nbsp;<p onClick={() => navigate('/register', { state: { path: window.location.pathname } })}>Sign Up</p></div>
                 </div>
                 <div className="col-sm-5" style={{objectFit: "contain"}}>

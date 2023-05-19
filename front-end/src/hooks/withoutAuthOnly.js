@@ -4,12 +4,11 @@ import { selectCurrentUser } from "../store/user/user-selector";
 
 function WithoutAuthOnly({ children }) {
     const authed = useSelector(selectCurrentUser);
-    const { path } = useLocation().state;
 
     return Object.keys(authed).length === 0 ? (
         children
     ) : (
-        <Navigate to={path} />
+        <Navigate to="/" />
     );
 }
 

@@ -20,12 +20,20 @@ class Controller extends BaseController
         return UserResume::where("include_in_community", 1)->get()->toArray();
     }
 
+    public function deleteCommunityResume($id)
+    {
+        $resume = UserResume::findOrFail($id); // Find the resume by ID
+        $resume->delete();
+
+        return ["data" => "Resume Deleted successful"];
+    }
+
     public function getAllInfo()
     {
         $userCount = User::count();
         $resume = UserResume::count();
         $communityResume = UserResume::where("include_in_community", 1)->count();
         $recommendationResume = ResumeRecommendation::count();
-        return response()->json(['user_count' => $userCount, 'resumes' => $resume, 'commmunity_resume' => $communityResume, "recommendationResume" => $recommendationResume]);
+        return response()->json(['user_count' => $userCount, 'resumes' => $resume, 'community_resume' => $communityResume, "recommendationResume" => $recommendationResume]);
     }
 }

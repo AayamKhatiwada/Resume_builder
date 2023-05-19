@@ -70,8 +70,9 @@
 }
 
 .option-card-img-top{
-    object-fit: fill;
+    object-fit: contain;
     width: 100%;
-    height: 180px;
+    height: 200px;
     padding: 10px;
+    background-color: white;
 }

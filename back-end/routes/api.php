@@ -29,6 +29,10 @@ Route::post('adminCheck', [AdminController::class, 'adminLogin']);
 
 Route::post('register', [UserController::class, 'register']);
 
+Route::get('getAllUsers', [UserController::class, 'getAllUsers']);
+
+Route::get('deleteUser/{id}', [UserController::class, 'deleteUser']);
+
 Route::post('saveResume', [UserResumeController::class, 'store']);
 
 
@@ -37,6 +41,8 @@ Route::get('getResume/{id}', [UserResumeController::class, 'show']);
 Route::get('getRecommendationResume', [ResumeRecommendationController::class, 'show']);
 
 Route::get('getAllInfo', [Controller::class, 'getAllInfo']);
+
+Route::get('deleteCommunityResume/{id}', [Controller::class, 'deleteCommunityResume']);
 
 Route::get('getCommunityResume', [UserResumeController::class, 'communityResumes']);
 

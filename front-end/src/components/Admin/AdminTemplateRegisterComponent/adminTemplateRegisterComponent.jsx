@@ -7,6 +7,7 @@ import { selectCurrentRecommendationResume } from "../../../store/resume/resume-
 import { TextField } from "@mui/material";
 import { ErrorNoty, SuccessNoty } from "../../../hooks/notifications";
 import { selectCurrentAdmin } from "../../../store/admin/admin-selector";
+import makeslug from "../../../hooks/randomGenerator";
 
 const {
     Bold,
@@ -58,21 +59,23 @@ const AdminTemplateRegisterComponent = () => {
     const admin = useSelector(selectCurrentAdmin)
     const [documentName, setDocumentName] = useState("Template");
     const dummyRecommendationResume = useSelector(selectCurrentRecommendationResume);
+    const [condition, setCondition] = useState(slugPara === "newRegister" ? "Submit" : "Update")
 
     useEffect(() => {
+
         dummyRecommendationResume.map((data) => {
             if (data.slug === slugPara) {
                 setDocumentName(data.title)
                 EditorUtils.setHtml(content.current.view, JSON.parse(data.ResumeData));
             }
         })
-
-        console.log(EditorUtils.getHtml(content.current.view.state))
+        // console.log(EditorUtils.getHtml(content.current.view.state))
     }, [])
+    console.log(slugPara)
 
-    const saveRecommendation = async () => {
+    const saveRecommendation = async (slug) => {
         let resume = {
-            slug: slugPara,
+            slug: slug,
             title: documentName === '' || documentName[0] === ' ' ? "Random" : documentName,
             data: JSON.stringify(EditorUtils.getHtml(content.current.view.state)),
         };
@@ -94,11 +97,11 @@ const AdminTemplateRegisterComponent = () => {
         }
     }
 
-    const checkLoginAndSave = () => {
-        if (admin.admin === "false") {
-            ErrorNoty("Cannot save your Resume please login")
-        } if (admin.admin === "true") {
-            saveRecommendation()
+    const UpdateOrCreate = () => {
+        if (slugPara === "newRegister") {
+            saveRecommendation(makeslug())
+        } else {
+            saveRecommendation(slugPara)
         }
     }
 
@@ -141,7 +144,7 @@ const AdminTemplateRegisterComponent = () => {
                     }} ref={content} />
                 </div>
                 <br />
-                <button className="btn btn-primary">Submit</button>
+                <button className="btn btn-primary" onClick={UpdateOrCreate}>{condition}</button>
             </AdminDashboardComponent>
         </>
     )

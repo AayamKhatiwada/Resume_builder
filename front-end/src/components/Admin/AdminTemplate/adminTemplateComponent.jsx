@@ -2,9 +2,9 @@ import AdminDashboardComponent from "../AdminDashboardComponent/adminDashboardCo
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { SuccessNoty } from "../../../hooks/notifications";
-import { setCurrentRecommendationResume } from "../../../store/resume/resume-action";
 import { selectCurrentRecommendationResume } from "../../../store/resume/resume-selector";
 import './adminTemplateComponent.css'
+import CreateTemplate from "../../../hooks/createTemplate";
 
 const AdminTemplateComponent = () => {
 
@@ -34,11 +34,12 @@ const AdminTemplateComponent = () => {
                 <div className="admin-recommendation-main">
                     {
                         dummyRecommendationResume?.map((resume) => {
+                            const imgurl = CreateTemplate(JSON.parse(resume.ResumeData), resume.id)
                             return (
                                 <div className="col-sm-2 mb-4 cards text-center" key={resume.id}>
-                                    <div onClick={() => navigate(`/createResume/${resume.slug}`, { state: "Admin" })} className="link">
+                                    <div onClick={() => navigate(`/admin/templates/${resume.slug}`, { state: "Admin" })} className="link">
                                         <div className="">
-                                            <img src={`http://127.0.0.1:8000/uploads/recommendationImage/${resume.image}`} alt="Random" width="200px" height="200px" style={{ objectFit: "cover" }} />
+                                            <img src={imgurl} alt="Random" className="admin-card-img-top" id={`UserResumeImage${resume.id}`} />
                                             <div className="cards-text my-3">
                                                 <h5>{resume.title}</h5>
                                             </div>

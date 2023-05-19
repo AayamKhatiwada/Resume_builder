@@ -9,7 +9,7 @@ import WithoutAuthOnly from './hooks/withoutAuthOnly';
 import { ToastContainer } from 'react-toastify';
 import AdminLogin from './routes/AdminLogin';
 import AdminDashboard from './routes/AdminDashboard';
-import { setCurrentRecommendationResume } from './store/resume/resume-action';
+import { setCurrentCommunityResume, setCurrentRecommendationResume } from './store/resume/resume-action';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import Community from './routes/Community';
@@ -17,6 +17,9 @@ import RequireAdminAuth from './hooks/RequireAdminAuth';
 import AdminSideBar from './components/Admin/AdminSideBar/adminSidebar';
 import AdminTemplateComponent from './components/Admin/AdminTemplate/adminTemplateComponent';
 import AdminTemplateRegisterComponent from './components/Admin/AdminTemplateRegisterComponent/adminTemplateRegisterComponent';
+import AdminUser from './components/Admin/AdminUser/adminUser';
+import AdminCommunity from './components/Admin/AdminCommunity/adminCommunity';
+import AdminCommunityView from './components/Admin/AdminCommunityView/adminCommunityView';
 
 function App() {
 
@@ -28,6 +31,18 @@ function App() {
       .then(
         (result) => {
           dispatch(setCurrentRecommendationResume(result));
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+
+    fetch(`http://127.0.0.1:8000/api/getCommunityResume`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result)
+          dispatch(setCurrentCommunityResume(result));
         },
         (error) => {
           console.log(error)
@@ -60,14 +75,10 @@ function App() {
                 <Routes>
                   <Route index element={<AdminDashboard />} />
                   <Route path="/templates" element={<AdminTemplateComponent />} />
-                  <Route path="/templates/:id" element={<AdminTemplateRegisterComponent />} />
-                  {/* <Route path="/party" element={<AdminParty />} />
-                  <Route path="/party/:id" element={<AdminPartyRegister />} />
-                  <Route path="/voters/:id" element={<AdminUserView />} />
-                  <Route path="/candidate" element={<AdminCandidate />} />
-                  <Route path="/candidate/:id" element={<AdminCandidateRegister />} />
-                  <Route path="/election" element={<AdminElection />} />
-                  <Route path="/election/:id" element={<AdminElectionRegister />} /> */}
+                  <Route path="/templates/:slugPara" element={<AdminTemplateRegisterComponent />} />
+                  <Route path="/users" element={<AdminUser />} />
+                  <Route path="/community" element={<AdminCommunity />} />
+                  <Route path="/community/:slugPara" element={<AdminCommunityView />} />
                 </Routes>
               </RequireAdminAuth>
             </>

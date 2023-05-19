@@ -7,7 +7,7 @@ const CreateTemplate = (element, i) => {
     temp.innerHTML = '<div>' + element + '</div>';
     var htmlObject = temp.firstChild;
     document.body.appendChild(htmlObject);
-    console.log(htmlObject)
+    // console.log(htmlObject)
 
     // Use html2canvas to create a canvas with the HTML content
     html2canvas(htmlObject).then(canvas => {
