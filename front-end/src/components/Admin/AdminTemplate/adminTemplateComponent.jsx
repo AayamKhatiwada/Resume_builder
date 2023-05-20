@@ -31,7 +31,7 @@ const AdminTemplateComponent = () => {
                 <div className="party-add-button">
                     <a href="templates/newRegister" className="btn btn-primary">Add templates</a>
                 </div>
-                <div className="admin-recommendation-main">
+                <div className="admin-recommendation-main d-flex flex-row flex-wrap justify-content-start">
                     {
                         dummyRecommendationResume?.map((resume) => {
                             const imgurl = CreateTemplate(JSON.parse(resume.ResumeData), resume.id)

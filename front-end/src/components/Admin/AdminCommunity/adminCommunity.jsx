@@ -25,7 +25,7 @@ const AdminCommunity = () => {
 
     return (
         <AdminDashboardComponent>
-            <div className="admin-recommendation-main">
+            <div className="admin-recommendation-main d-flex flex-row flex-wrap justify-content-start">
                 {
                     currentCommunityResume?.map((resume) => {
                         const imgurl = CreateTemplate(JSON.parse(resume.ResumeData), resume.slug)

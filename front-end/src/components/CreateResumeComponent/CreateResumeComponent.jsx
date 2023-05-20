@@ -67,12 +67,14 @@ const CreateResumeComponent = () => {
     const [documentName, setDocumentName] = useState("Document");
     const allResumeData = useSelector(selectCurrentResume);
     const communityResume = useSelector(selectCurrentCommunityResume);
+    const dummyRecommendationResume = useSelector(selectCurrentRecommendationResume);
     const [checked, setChecked] = useState(false);
     const [checkedData, setCheckedData] = useState(checked ? "Make it public" : "Keep it private")
 
     const location = useLocation();
     const data = location.state;
-    console.log(data)
+    console.log(slugPara)
+    console.log(communityResume)
 
     const handleChangeChecked = (event) => {
         setChecked(event.target.checked);
@@ -92,6 +94,14 @@ const CreateResumeComponent = () => {
             }
         })
 
+        dummyRecommendationResume.map((data) => {
+            if (data.slug === slugPara) {
+                setDocumentName(data.title)
+                EditorUtils.setHtml(content.current.view, JSON.parse(data.ResumeData));
+                setIsRecommendation(true)
+            }
+        })
+
         communityResume.map((data) => {
             if (data.slug === slugPara) {
                 setDocumentName(data.title)
@@ -104,7 +114,7 @@ const CreateResumeComponent = () => {
                 }
             }
         })
-        // console.log(EditorUtils.getHtml(content.current.view.state))
+        console.log(EditorUtils.getHtml(content.current.view.state))
     }, [])
 
     const saveToDatabase = async () => {

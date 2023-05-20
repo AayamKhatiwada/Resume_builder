@@ -10,6 +10,7 @@ import FooterComponent from '../FooterComponent/footerComponent';
 import { selectCurrentUser } from '../../store/user/user-selector';
 import IsAuthed from '../../hooks/isAuthed';
 import CreateTemplate from '../../hooks/createTemplate';
+import Logo from '../assets/logo.png'
 
 const OptionComponent = () => {
     const user = useSelector(selectCurrentUser)
@@ -39,11 +40,11 @@ const OptionComponent = () => {
     }, [])
 
     const newFilteredRecommendationResume = dummyRecommendationResume.filter((resume) => {
-        return resume.title.toLowerCase().includes(search)
+        return resume.title.toLowerCase().includes(search.toLowerCase())
     })
 
     const newFilteredResume = dummyResume.filter((resume) => {
-        return resume.title.toLowerCase().includes(search)
+        return resume.title.toLowerCase().includes(search.toLowerCase())
     })
 
     return (
@@ -53,7 +54,7 @@ const OptionComponent = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <a className="navbar-brand mx-sm-4" href="/">
-                    <img src="https://via.placeholder.com/150x150" alt="Logo" />
+                    <img src={Logo} alt="Logo" />
                 </a>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <form className="form-inline my-2 my-lg-0">
@@ -115,7 +116,7 @@ const OptionComponent = () => {
                                     };
                                     var date = new Date(resume.updated_at);
                                     const dateFormatted = date.toLocaleString('en-US', options)
-                                    console.log(JSON.parse(resume.ResumeData))
+                                    // console.log(JSON.parse(resume.ResumeData))
                                     CreateTemplate(JSON.parse(resume.ResumeData), resume.id)
 
                                     return (

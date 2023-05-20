@@ -28,10 +28,10 @@ const AdminLoginComponent = () => {
     return (
         <>
             <div className="admin-login">
-                <h1>Admin Login</h1>
-                <label htmlFor="username">Username</label>
+                <h1 style={{color: "white"}}>Admin Login</h1>
+                <label htmlFor="username" style={{color: "white"}}>Username</label>
                 <input type="text" name="username" id="username" value={admin} onChange={(e) => setAdmin(e.target.value)} />
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password" style={{color: "white"}}>Password</label>
                 <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <input type="submit" value="Log in" onClick={() => onSubmit()} />
             </div>

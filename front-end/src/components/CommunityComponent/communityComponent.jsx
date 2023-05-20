@@ -12,7 +12,7 @@ const CommunityComponent = () => {
     const [search, setSearch] = useState("")
 
     const filterCommunityResume = communityResume.filter((resume) => {
-        return resume.title.toLowerCase().includes(search)
+        return resume.title.toLowerCase().includes(search.toLowerCase())
     })
 
     return (
@@ -39,7 +39,7 @@ const CommunityComponent = () => {
             </header>
             <div className="container mt-5">
                 <div className="row">
-                    <div className="col-lg-8">
+                    <div className="col-sm-12">
                         <h2>Resumes</h2>
                         <div className='d-flex flex-wrap'>
                             {
@@ -55,7 +55,7 @@ const CommunityComponent = () => {
                                     CreateTemplate(JSON.parse(resume.ResumeData), resume.slug)
 
                                     return (
-                                        <div className="col-sm-3 m-3 card" key={resume.id}>
+                                        <div className="col-sm-2 m-3 card" key={resume.id}>
                                             <div onClick={() => navigate(`/createResume/${resume.slug}`, { state: "Community" })} className="link">
                                                 <div className="">
                                                     <img src="" alt="Random" className="card-img-top" width="180px" height="210px" id={`UserResumeImage${resume.slug}`} style={{ objectFit: "scale-down", padding: "1rem" }} />
