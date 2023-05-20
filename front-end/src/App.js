@@ -26,28 +26,31 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/getRecommendationResume')
-      .then(res => res.json())
-      .then(
-        (result) => {
-          dispatch(setCurrentRecommendationResume(result));
-        },
-        (error) => {
-          console.log(error)
-        }
-      )
+    const call = async() => {
+      fetch('http://127.0.0.1:8000/api/getRecommendationResume')
+        .then(res => res.json())
+        .then(
+          (result) => {
+            dispatch(setCurrentRecommendationResume(result));
+          },
+          (error) => {
+            console.log(error)
+          }
+        )
 
-    fetch(`http://127.0.0.1:8000/api/getCommunityResume`)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          console.log(result)
-          dispatch(setCurrentCommunityResume(result));
-        },
-        (error) => {
-          console.log(error)
-        }
-      )
+      fetch(`http://127.0.0.1:8000/api/getCommunityResume`)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            dispatch(setCurrentCommunityResume(result));
+          },
+          (error) => {
+            console.log(error)
+          }
+        )
+    }
+
+    call()
   }, [])
 
   return (

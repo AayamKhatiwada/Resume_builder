@@ -43,13 +43,13 @@ const AdminDashboardItemComponent = () => {
                                     <p className="card-text">{resumeData?.resumes}</p>
                                 </div>
                             </div>
-                            <div className="col-md-3">
+                            <div className="col-md-3" onClick={() => navigate('/admin/community')}>
                                 <div className="card-body">
                                     <h5 className="card-title">Resumes in community</h5>
                                     <p className="card-text">{resumeData?.community_resume}</p>
                                 </div>
                             </div>
-                            <div className="col-md-3">
+                            <div className="col-md-3" onClick={() => navigate('/admin/templates')}>
                                 <div className="card-body">
                                     <h5 className="card-title">Template Resumes</h5>
                                     <p className="card-text">{resumeData?.recommendationResume}</p>

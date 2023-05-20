@@ -1,7 +1,7 @@
 import './optionComponent.css';
 import DocBlank from '../assets/doc-blank.png'
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import makeslug from '../../hooks/randomGenerator';
 import { selectCurrentRecommendationResume, selectCurrentResume } from '../../store/resume/resume-selector';
@@ -18,20 +18,33 @@ const OptionComponent = () => {
     const randomSlug = makeslug();
     const dispatch = useDispatch();
 
+    const [search, setSearch] = useState('')
+
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/getResume/${user.id}`)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result)
-                    dispatch(setCurrentResume(result));
-                },
-                (error) => {
-                    console.log(error)
-                }
-            )
+        const getUserData = () => {
+            fetch(`http://127.0.0.1:8000/api/getResume/${user.id}`)
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                        console.log(result)
+                        dispatch(setCurrentResume(result));
+                    },
+                    (error) => {
+                        console.log(error)
+                    }
+                )
+        }
+
+        user.length !== 0 && getUserData()
     }, [])
-    console.log(dummyResume)
+
+    const newFilteredRecommendationResume = dummyRecommendationResume.filter((resume) => {
+        return resume.title.toLowerCase().includes(search)
+    })
+
+    const newFilteredResume = dummyResume.filter((resume) => {
+        return resume.title.toLowerCase().includes(search)
+    })
 
     return (
         <>
@@ -40,12 +53,12 @@ const OptionComponent = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <a className="navbar-brand mx-sm-4" href="/">
-                    <img src="https://via.placeholder.com/150x150" alt="Logo"/>
+                    <img src="https://via.placeholder.com/150x150" alt="Logo" />
                 </a>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <form className="form-inline my-2 my-lg-0">
                         <div className="form-group">
-                            <input type="text" className="form-control" placeholder="Search" />
+                            <input type="text" className="form-control" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                             <button type="submit" className="btn btn-search"><i className="fa fa-search"></i></button>
                         </div>
                     </form>
@@ -59,7 +72,7 @@ const OptionComponent = () => {
                         <div className="col-sm-2 mb-4 cards">
                             <Link to={`/createResume/${randomSlug}`} className="link">
                                 <div className="">
-                                    <img src={DocBlank} alt="Random" className="card-img-top" width="200px" height="200px" style={{objectFit: "cover"}}/>
+                                    <img src={DocBlank} alt="Random" className="card-img-top" width="200px" height="200px" style={{ objectFit: "cover" }} />
                                     <div className="cards-text">
                                         <h5 style={{ color: "black" }}>New Resume</h5>
                                     </div>
@@ -67,7 +80,7 @@ const OptionComponent = () => {
                             </Link>
                         </div>
                         {
-                            dummyRecommendationResume?.map((resume) => {
+                            newFilteredRecommendationResume?.map((resume) => {
                                 CreateTemplate(JSON.parse(resume.ResumeData), resume.slug)
                                 return (
                                     <div className="col-sm-2 mb-4 cards" key={resume.id}>
@@ -94,7 +107,7 @@ const OptionComponent = () => {
                         <div className='recommendation-title'>Recent Resumes</div>
                         <div className="d-flex flex-row flex-wrap justify-content-start">
                             {
-                                dummyResume?.map((resume) => {
+                                newFilteredResume?.map((resume) => {
                                     const options = {
                                         year: 'numeric',
                                         month: 'long',
@@ -109,7 +122,7 @@ const OptionComponent = () => {
                                         <div className="col-sm-2 mb-4 cards card" key={resume.id}>
                                             <Link to={`/createResume/${resume.slug}`} className="link">
                                                 <div className="">
-                                                    <img src={''} alt="Random" className="option-card-img-top" id={`UserResumeImage${resume.id}`}/>
+                                                    <img src={''} alt="Random" className="option-card-img-top" id={`UserResumeImage${resume.id}`} />
                                                     <hr />
                                                     <div className="cards-text">
                                                         <h5>{resume.title}</h5>

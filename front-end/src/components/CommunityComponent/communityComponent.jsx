@@ -1,23 +1,41 @@
 import { useNavigate } from 'react-router-dom';
 import './communityComponent.css'
-import { useEffect } from 'react';
-import CreateImage from '../../hooks/createImage';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentCommunityResume } from '../../store/resume/resume-action';
+import { useSelector } from 'react-redux';
 import { selectCurrentCommunityResume } from '../../store/resume/resume-selector';
 import CreateTemplate from '../../hooks/createTemplate';
+import { useState } from 'react';
 
 const CommunityComponent = () => {
 
     const navigate = useNavigate()
     const communityResume = useSelector(selectCurrentCommunityResume);
-    console.log(communityResume)
+    const [search, setSearch] = useState("")
+
+    const filterCommunityResume = communityResume.filter((resume) => {
+        return resume.title.toLowerCase().includes(search)
+    })
 
     return (
         <>
             <header className="text-white text-center py-5" style={{ background: "rgb(253 124 31 / 91%)" }}>
                 <h1>Resume Community</h1>
                 <p className="lead">Share and showcase your resumes</p>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="input-group mb-3">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Search resumes..."
+                                    value={search}
+                                    onChange={(e)=> setSearch(e.target.value)}
+                                />
+                                <button className="btn btn-primary" type="button">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </header>
             <div className="container mt-5">
                 <div className="row">
@@ -25,7 +43,7 @@ const CommunityComponent = () => {
                         <h2>Resumes</h2>
                         <div className='d-flex flex-wrap'>
                             {
-                                communityResume.length !== 0 && communityResume?.map((resume) => {
+                                filterCommunityResume.length !== 0 ? filterCommunityResume?.map((resume) => {
                                     const options = {
                                         year: 'numeric',
                                         month: 'long',
@@ -40,7 +58,7 @@ const CommunityComponent = () => {
                                         <div className="col-sm-3 m-3 card" key={resume.id}>
                                             <div onClick={() => navigate(`/createResume/${resume.slug}`, { state: "Community" })} className="link">
                                                 <div className="">
-                                                    <img src="" alt="Random" className="card-img-top" width="180px" height="210px" id={`UserResumeImage${resume.slug}`} style={{ objectFit: "scale-down",padding:"1rem" }} />
+                                                    <img src="" alt="Random" className="card-img-top" width="180px" height="210px" id={`UserResumeImage${resume.slug}`} style={{ objectFit: "scale-down", padding: "1rem" }} />
                                                     <hr />
                                                     <div className="cards-text">
                                                         <h5>{resume.title}</h5>
@@ -51,31 +69,14 @@ const CommunityComponent = () => {
                                         </div>
                                     )
                                 })
+                                :
+                                (
+                                    <div style={{height: "21.5rem"}}>
+                                        There are no templates
+                                    </div>
+                                )
                             }
                         </div>
-                    </div>
-                    <div className="col-lg-4">
-                        <h2>Filter By</h2>
-                        <form>
-                            <div className="form-group">
-                                <label htmlFor="filterCategory">Category</label>
-                                <select className="form-control community-form-control" id="filterCategory">
-                                    <option>All</option>
-                                    <option>Software Developer</option>
-                                    <option>UX Designer</option>
-                                </select>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="filterLocation">Location</label>
-                                <select className="form-control community-form-control" id="filterLocation">
-                                    <option>All</option>
-                                    <option>New York</option>
-                                    <option>San Francisco</option>
-                                    <option>Los Angeles</option>
-                                </select>
-                            </div>
-                            <button type="submit" className="btn btn-warning text-white">Apply Filter</button>
-                        </form>
                     </div>
                 </div>
             </div>
